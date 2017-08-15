@@ -63,6 +63,39 @@ Kafka also has a command line consumer that will dump out messages to standard o
   
 ```
 
+## Intial Configuration of Apache Flink
+
+Installation is very simple. You simply need to decompress the tar into the `/opt` or `/usr/local` directory and configure the shell environment variables in .profile to make it easier to use your scripts.
+
+
+```
+  export FLINK_HOME=/opt/flink-1.3.2
+  export PATH=$PATH:$FLINK_HOME/bin
+
+```
+
+It will also be necessary to mark it as the property of the user group working with hadoop tools and configure the appropriate permissions:
+
+
+```
+  sudo chown -R :hadoop /opt/flink-1.3.2
+  sudo chmod -R 770 /opt/flink-1.3.2
+  
+```
+
+Start a Local Flink Cluster:
+
+```
+  start-local.sh
+  Starting jobmanager daemon on  host "hostname"
+```
+
+The **JobManager's web frontend** should be running. We can check it as follows:
+
+```
+  tail /opt/flink-1.3.2/log/flink-sergio-jobmanager-1-ldapserver.log | grep JobManager
+  
+```
 
 
 
