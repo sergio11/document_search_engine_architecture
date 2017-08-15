@@ -97,5 +97,36 @@ The **JobManager's web frontend** should be running. We can check it as follows:
   
 ```
 
+## Intial Configuration of Apache HBase
+
+We check if **HBase Web UI** is running (port 16010) using the following command:
+
+```
+  ss -ltp | grep 16010
+
+```
+We will keep the schema for our use case straightforward. The rowID will be the filename, and there will be two column families: “info” and “obj”.  The “info” column family will contain all the fields we extracted from the images. The “obj” column family will hold the bytes of the actual binary object, in this case PDF. The name of the table in our case will be “mdds.”
+
+The command below will create the table and enable replication on a column family called “info.” **It’s crucial to specify the option REPLICATION_SCOPE => '1'** else the HBase Lily Indexer will not get any updates from HBase. 
+
+We want to use the **MOB path in HBase for objects larger that 10MB.** To accomplish that we also create another column family, called “obj,” using the following parameters for MOBs.
+
+The IS_MOB parameter specifies whether this column family can store MOBs, while MOB_THRESHOLD specifies after how large the object has to be for it to be considered a MOB.
+
+```
+  create 'mdds', { 
+      NAME => 'info', 
+      DATA_BLOCK_ENCODING => 'FAST_DIFF',
+      REPLICATION_SCOPE => '1'
+     },
+     {
+      NAME => 'obj', 
+      IS_MOB => true, 
+      MOB_THRESHOLD => 10240000
+   }
+
+```
+Using the shell commands **'describe  "mdds" '** and **'list'** we can check if the table was created successfully.
+
 
 
