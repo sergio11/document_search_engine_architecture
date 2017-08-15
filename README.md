@@ -1,7 +1,9 @@
 # fda-ingestion-platform
 
 
-## Initial configuration of Apache Kafka
+## Environment Setup
+
+### Initial configuration of Apache Kafka
 
 Installation is very simple. Simply decompress the tar to `/usr/local` or `/opt` and set the shell environment variable in .profile to make it easier to access your scripts.
 
@@ -63,7 +65,7 @@ Kafka also has a command line consumer that will dump out messages to standard o
   
 ```
 
-## Intial Configuration of Apache Flink
+### Intial Configuration of Apache Flink
 
 Installation is very simple. You simply need to decompress the tar into the `/opt` or `/usr/local` directory and configure the shell environment variables in .profile to make it easier to use your scripts.
 
@@ -97,7 +99,7 @@ The **JobManager's web frontend** should be running. We can check it as follows:
   
 ```
 
-## Intial Configuration of Apache HBase
+### Intial Configuration of Apache HBase
 
 We check if **HBase Web UI** is running (port 16010) using the following command:
 
@@ -128,5 +130,41 @@ The IS_MOB parameter specifies whether this column family can store MOBs, while 
 ```
 Using the shell commands **'describe  "mdds" '** and **'list'** we can check if the table was created successfully.
 
+### Build Leptonica and Tesseract.
+
+Build the **JNI bindings for Tesseract and Leptonica** from javaCPP presets:
+
+```
+  git clone https://github.com/bytedeco/javacpp-presets.git
+  
+  cd javacpp-presets
+
+```
+
+#### Build Leptonica
+
+```
+  cd leptonica
+  ./cppbuild.sh install leptonica
+  cd cppbuild/linux-x86_64/leptonica-1.72/
+  LDFLAGS="-Wl,-rpath -Wl,/usr/local/lib" ./configure
+  make &amp;&amp; sudo make install
+  cd ../../../
+  mvn clean install
+  cd ..
+```
+
+#### Build Tesseract
+
+```
+  cd tesseract
+  ./cppbuild.sh install tesseract
+  cd tesseract/cppbuild/linux-x86_64/tesseract-3.03
+  LDFLAGS="-Wl,-rpath -Wl,/usr/local/lib" ./configure
+  make &amp;&amp; make install
+  cd ../../../
+  mvn clean install
+  cd ..
+```
 
 
