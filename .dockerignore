@@ -1,0 +1,4 @@
+#Ignore everything by default, we only want the Dockerfile and the `root` directory in the build context.
+**
+!Dockerfile
+!root
