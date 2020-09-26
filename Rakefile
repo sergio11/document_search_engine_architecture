@@ -18,7 +18,7 @@ end
 desc "Start Containers"
 task :start => [ :check_docker_task, :login, :check_deployment_file_task ] do 
 	puts "Start Containers"
-	puts `docker-compose up -d`
+	puts `docker-compose up -d --remove-orphans`
 end 
 
 desc "Stop Containers"
