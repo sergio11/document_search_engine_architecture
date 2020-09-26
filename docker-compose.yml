@@ -1,12 +1,13 @@
 version: '3.6'
 
-
 volumes:
   apache-nifi_data:
     driver: local
   zookeeper-data:
     driver: local
   zookeeper-log:
+    driver: local
+  kafka-data:
     driver: local
   hadoop_namenode:
     driver: local
@@ -46,6 +47,85 @@ services:
       - zookeeper-log:/var/lib/zookeeper/log
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
+
+  # Kafka is a distributed streaming platform. It is used to build real-time streaming
+  # data pipelines that reliably move data between systems and platforms, and to build
+  # real-time streaming applications that transform or react to the streams of data.
+  # http://kafka.apache.org/
+  kafka:
+    image: confluentinc/cp-kafka
+    container_name: kafka
+    volumes:
+      - kafka-data:/var/lib/kafka
+    environment:
+      # Required. Instructs Kafka how to get in touch with ZooKeeper.
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_NUM_PARTITIONS: 1
+      KAFKA_COMPRESSION_TYPE: gzip
+      # Required when running in a single-node cluster, as we are. We would be able to take the default if we had
+      # three or more nodes in the cluster.
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      # Required. Kafka will publish this address to ZooKeeper so clients know
+      # how to get in touch with Kafka. "PLAINTEXT" indicates that no authentication
+      # mechanism will be used.
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+    links:
+      - zookeeper
+
+  # The Kafka REST Proxy provides a RESTful interface to a Kafka cluster.
+  # It makes it easy to produce and consume messages, view the state
+  # of the cluster, and perform administrative actions without using
+  # the native Kafka protocol or clients.
+  # https://github.com/confluentinc/kafka-rest
+  kafka-rest-proxy:
+    image: confluentinc/cp-kafka-rest:latest
+    container_name: kafka-rest-proxy
+    environment:
+      # Specifies the ZooKeeper connection string. This service connects
+      # to ZooKeeper so that it can broadcast its endpoints as well as
+      # react to the dynamic topology of the Kafka cluster.
+      KAFKA_REST_ZOOKEEPER_CONNECT: zookeeper:2181
+      # The address on which Kafka REST will listen for API requests.
+      KAFKA_REST_LISTENERS: http://0.0.0.0:8082/
+      # Required. This is the hostname used to generate absolute URLs in responses.
+      # It defaults to the Java canonical hostname for the container, which might
+      # not be resolvable in a Docker environment.
+      KAFKA_REST_HOST_NAME: kafka-rest-proxy
+      # The list of Kafka brokers to connect to. This is only used for bootstrapping,
+      # the addresses provided here are used to initially connect to the cluster,
+      # after which the cluster will dynamically change. Thanks, ZooKeeper!
+      KAFKA_REST_BOOTSTRAP_SERVERS: kafka:9092
+    # Kafka REST relies upon Kafka, ZooKeeper
+    # This will instruct docker to wait until those services are up
+    # before attempting to start Kafka REST.
+    ports:
+      - "9999:8082"
+    depends_on:
+      - zookeeper
+      - kafka
+
+  # Browse Kafka topics and understand what's happening on your cluster.
+  # Find topics / view topic metadata / browse topic data
+  # (kafka messages) / view topic configuration / download data.
+  # https://github.com/Landoop/kafka-topics-ui
+  kafka-topics-ui:
+    image: landoop/kafka-topics-ui:latest
+    container_name: kafka-topics-ui
+    ports:
+      - "8081:8000"
+    environment:
+      # Required. Instructs the UI where it can find the Kafka REST Proxy.
+      KAFKA_REST_PROXY_URL: "http://kafka-rest-proxy:8082/"
+      # This instructs the docker image to use Caddy to proxy traffic to kafka-topics-ui.
+      PROXY: "true"
+    # kafka-topics-ui relies upon Kafka REST.
+    # This will instruct docker to wait until those services are up
+    # before attempting to start kafka-topics-ui.
+    depends_on:
+      - kafka-rest-proxy
 
   # Unofficial convenience binaries and Docker images for Apache NiFi 
   nifi:
@@ -121,7 +201,7 @@ services:
     env_file:
       - ./hadoop.env
     ports:
-      - '8081:8088'
+      - '8082:8088'
 
   nodemanager:
     image: bde2020/hadoop-nodemanager:2.0.0-hadoop3.2.1-java8
