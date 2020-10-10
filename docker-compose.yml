@@ -42,7 +42,7 @@ services:
     container_name: sftp
     volumes:
       - ./sftp/users.conf:/etc/sftp/users.conf:ro
-      - ./sftp/upload:/home/ssanchez/upload
+      - ./sftp/upload:/home/ssanchez/uploads
     ports:
       - "2222:22"
 
@@ -236,6 +236,38 @@ services:
     # before attempting to start kafka-topics-ui.
     depends_on:
       - kafka-rest-proxy
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    env_file:
+      - .env
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGO_DB}
+
+  # Web-based MongoDB admin interface, written with Node.js and express
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    env_file:
+      - .env
+    restart: always
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+      - ME_CONFIG_MONGODB_AUTH_DATABASE=admin
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGO_ROOT_USER}
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGO_ROOT_PASSWORD}
+      - ME_CONFIG_BASICAUTH_USERNAME=${MONGOEXPRESS_LOGIN}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${MONGOEXPRESS_PASSWORD}
+    depends_on:
+      - mongo
+    ports:
+      - "8084:8081"
 
 
   
