@@ -67,13 +67,13 @@ services:
 
   # Unofficial convenience binaries and Docker images for Apache NiFi 
   nifi:
-    image: apache/nifi:latest
+    build: 
+      context: ./nifi
     container_name: nifi
     ports:
       - 8080 # Unsecured HTTP Web Port
     volumes:
       - 'apache-nifi_data:/apache/nifi'
-      - ./nifi/conf:/opt/nifi/conf
     environment:
       - NIFI_WEB_HTTP_PORT=8080
       - NIFI_CLUSTER_IS_NODE=true
