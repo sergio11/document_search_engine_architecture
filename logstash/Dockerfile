@@ -1,5 +1,8 @@
 FROM docker.elastic.co/logstash/logstash:7.9.2
 
-# This is a logstash plugin for pulling data out of mongodb and processing with logstash.
-RUN logstash-plugin install logstash-input-mongodb 
+RUN mkdir /usr/share/logstash/drivers
+COPY ./drivers/* /usr/share/logstash/drivers/
+
+# Plugins
+RUN logstash-plugin install logstash-integration-jdbc
 RUN logstash-plugin install logstash-output-elasticsearch

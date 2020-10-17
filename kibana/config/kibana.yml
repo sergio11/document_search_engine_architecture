@@ -1,3 +1,11 @@
 server.name: kibana
-server.host: "0"
-elasticsearch.hosts: [ "http://elasticsearch:9200" ]
+server.host: "0.0.0.0"
+elasticsearch.hosts: [ "https://elasticsearch:9200" ]
+elasticsearch.username: kibana
+elasticsearch.password: ssanchez00
+elasticsearch.ssl.certificateAuthorities: /etc/kibana/keys/certificate.pem
+elasticsearch.ssl.verificationMode: certificate
+xpack.monitoring.elasticsearch.hosts: [ "https://elasticsearch:9200" ]
+xpack.monitoring.enabled: true
+xpack.monitoring.elasticsearch.username: elastic
+xpack.monitoring.elasticsearch.password: ssanchez00

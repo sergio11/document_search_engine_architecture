@@ -1,0 +1,30 @@
+Esto se debe a un control denominado validación de nombre de host, es decir, un control de que el CN ​​o una de las 
+SAN incluidas en un certificado X509 coinciden con el nombre de host del host que utiliza ese certificado para TLS.
+
+
+
+xpack.security.transport.ssl.enabled: true
+xpack.security.transport.ssl.keystore.type: PKCS12
+xpack.security.transport.ssl.keystore.password: ssanchez00
+xpack.security.transport.ssl.verification_mode: certificate
+xpack.security.transport.ssl.keystore.path: elastic-certificates.p12
+xpack.security.transport.ssl.truststore.path: elastic-certificates.p12
+xpack.security.transport.ssl.truststore.type: PKCS12
+
+ docker cp cc27174afdd8928a99815ed332277c0c9ddc5476f38630ed2a3dbae6daca6953:/usr/share/elasticsearch/certificates  certici
+
+
+
+Creating logstash ... error
+
+ERROR: for logstash  Cannot create container for service logstash: invalid mode: /usr/share/logstash/
+
+ERROR: for logstash  Cannot create container for service logstash: invalid mode: /usr/share/logstash/
+ERROR: Encountered errors while bringing up the project.
+Step 1/4 : FROM docker.elastic.co/logstash/logstash:7.9.2
+7.9.2: Pulling from logstash/logstash
+Digest: sha256:f2c9d6d0fcd63cdb2a44dea7e9af1ccd6cc388a8af409fa66865abcab64b2c61
+Status: Downloaded newer image for docker.elastic.co/logstash/logstash:7.9.2
+ ---> 736bccdc74f4
+Step 2/4 : RUN logstash-plugin install logstash-input-mongodb
+ ---> Running in 99a313fe7f05

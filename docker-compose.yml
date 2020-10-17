@@ -323,6 +323,7 @@ services:
       - "5601:5601"
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+      - ./kibana/certificate/:/etc/kibana/keys/
     depends_on:
       - elasticsearch
 
