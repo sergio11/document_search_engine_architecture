@@ -1,0 +1,10 @@
+http.host: "0.0.0.0"
+log.level: debug
+xpack.monitoring.elasticsearch.hosts: [ "elasticsearch:9200" ]
+xpack.monitoring.enabled: true
+xpack.monitoring.elasticsearch.username: elastic
+xpack.monitoring.elasticsearch.password: ssanchez00
+xpack.monitoring.elasticsearch.ssl.certificate_authority: "/etc/logstash/keys/certificate.pem"
+xpack.monitoring.elasticsearch.ssl.verification_mode: none
+xpack.monitoring.elasticsearch.sniffing: false
+xpack.monitoring.collection.interval: 60s

@@ -21,6 +21,8 @@ volumes:
     driver: local
   elasticsearch-data:
     driver: local
+  logstash-data:
+    driver: local
 
 
 services:
@@ -295,16 +297,21 @@ services:
   # Logstash is an open source data collection engine with real-time pipelining 
   # capabilities. Logstash can dynamically unify data from disparate sources and normalize the data into destinations of your choice.
   logstash:
-    build: 
+    build:
       context: ./logstash
+      dockerfile: Dockerfile
     container_name: logstash
     ports:
       - "5000:5000"
       - "9600:9600"
     volumes:
+      - logstash-data:/usr/share/logstash/data
       - ./logstash/pipeline/:/usr/share/logstash/pipeline/
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./logstash/certificate/:/etc/logstash/keys/
+    restart: always
     environment:
-      - "LS_JAVA_OPTS=-Xmx256m -Xms256m"
+      - "LS_JAVA_OPTS=-Xmx400m -Xms400m"
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.6.2
