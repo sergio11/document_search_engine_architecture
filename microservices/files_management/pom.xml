@@ -5,11 +5,11 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.dreamsoftware</groupId>
-    <artifactId>document_search_engine_gateway</artifactId>
+    <artifactId>document_search_engine_files_management</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>api_gateway_service</name>
-    <description>Document Search Engine API Gateway</description>
+    <name>file_management_service</name>
+    <description>Document Search Engine Files Management</description>
 
     <parent>
         <groupId>com.dreamsoftware</groupId>
@@ -21,13 +21,18 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-client</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-resource-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-jose</artifactId>
         </dependency>
     </dependencies>
+
 
 
     <build>
@@ -36,7 +41,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <finalName>api_gateway_service</finalName>
+                    <finalName>file_management_service</finalName>
                 </configuration>
             </plugin>
 
@@ -56,16 +61,16 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>ssanchez11/api_gateway_service</repository>
+                    <repository>ssanchez11/file_management_service</repository>
                     <tag>${project.version}</tag>
                     <buildArgs>
-                        <JAR_FILE>api_gateway_service</JAR_FILE>
+                        <JAR_FILE>file_management_service</JAR_FILE>
                     </buildArgs>
                     <useMavenSettingsForAuth>false</useMavenSettingsForAuth>
                     <forceTags>true</forceTags>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
+
 </project>

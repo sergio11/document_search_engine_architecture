@@ -1,6 +1,14 @@
 spring:
   application:
-    name: callme
+    name: files-search-service
+  cloud:
+    consul:
+        host: consul
+        port: 8500
+        discovery:
+            port: 8080
+            prefer-ip-address: true
+            healthCheckPath: /actuator/health
   security:
     oauth2:
       resourceserver:
@@ -12,4 +20,4 @@ logging.level:
   org.springframework.security: DEBUG
   org.springframework.web.reactive.function.client: TRACE
 
-server.port: 8040
+server.port: 8080
