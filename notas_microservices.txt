@@ -1,0 +1,20 @@
+Apache Commons Net vs Spring Integration FTP Support
+
+En términos generales, en el mundo de la integración de aplicaciones empresariales (EAI), 
+tenemos cuatro tipos de integración: sincronización de archivos, RPC, sincronización de bases de datos y mensajería.
+
+
+ El servidor FTP Apache es una implementación súper escalable, liviana y completamente en Java del protocolo FTP
+
+Dota a las aplicaciones que lo incluyan de la capacidad de Consul de descubrimiento 
+y registro de servicios, atacando al API HTTP del mismo.
+
+Para ello, por defecto, hace uso del endpoint /health, el cual disponibiliza *Spring Boot Actuator *de forma nativa 
+y con solo incluir la dependencia tenemos health checking sin complicarnos demasiado:
+
+Ribbon
+
+La puerta de enlace API toma todas las llamadas a la API de los clientes y las enruta a los microservicios 
+apropiados con el enrutamiento de solicitudes, la composición y la traducción del protocolo.
+
+https://www.learnnowlab.com/Spring-Cloud-Gateway-with-Spring-Security/
