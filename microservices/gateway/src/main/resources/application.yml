@@ -1,17 +1,41 @@
 spring:
   application:
-    name: gateway
+    name: gateway-service
   cloud:
+    consul:
+        host: consul
+        port: 8500
+    discovery:
+        register: false
+        registerHealthCheck: false
     gateway:
-      default-filters:
-        - TokenRelay
-      routes:
-        - id: callme-service
-          uri: http://localhost:8040
-          predicates:
-            - Path=/callme/**
-          filters:
-            - RemoveRequestHeader=Cookie
+        discovery:
+            locator:
+                enabled: true
+        default-filters:
+            - TokenRelay
+        routes:
+            - id: files-metadata-service
+              uri: lb://files-metadata-service
+              predicates:
+                - Path=/metadata/**
+              filters:
+                - RemoveRequestHeader=Cookie
+                - RewritePath=/metadata/(?<path>.*), /$\{path}
+            - id: files-search-service
+              uri: lb://files-search-service
+              predicates:
+                - Path=/search/**
+              filters:
+                - RemoveRequestHeader=Cookie
+                - RewritePath=/search/(?<path>.*), /$\{path}
+            - id: files-management-service
+              uri: lb://files-management-service
+              predicates:
+                - Path=/management/**
+              filters:
+                - RemoveRequestHeader=Cookie
+                - RewritePath=/management/(?<path>.*), /$\{path}
   security:
     oauth2:
       client:
@@ -29,7 +53,7 @@ spring:
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
 
-server.port: 8060
+server.port: 8080
 
 logging.level:
   org.springframework.cloud.gateway: DEBUG

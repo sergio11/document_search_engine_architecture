@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/callme")
-public class CallmeController {
+@RequestMapping("/metadata")
+public class FilesMetadataController {
 
     //@PreAuthorize("hasAuthority('SCOPE_TEST')")
     @GetMapping("/ping")
