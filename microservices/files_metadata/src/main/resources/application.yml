@@ -14,6 +14,18 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8090/auth/realms/document_search_engine
+  data:
+    mongodb:
+        database: files
+        host: mongo
+        port: 27017
+        username: devroot
+        password: devroot
+
+## Spring Open API
+springdoc:
+    swagger-ui.path: /swagger-ui.html
+    api-docs.path: /api-docs
 
 logging.level:
   org.springframework.cloud.gateway: DEBUG

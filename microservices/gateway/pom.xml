@@ -18,6 +18,10 @@
         <relativePath>../</relativePath>
     </parent>
 
+    <properties>
+        <springdoc.openapi.webflux>1.4.8</springdoc.openapi.webflux>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -26,6 +30,16 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-webflux-core</artifactId>
+            <version>${springdoc.openapi.webflux}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-webflux-ui</artifactId>
+            <version>${springdoc.openapi.webflux}</version>
         </dependency>
     </dependencies>
 

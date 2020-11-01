@@ -1,4 +1,4 @@
-package com.dreamsoftware.documentsearchengine.security.callme.config;
+package com.dreamsoftware.documentsearchengine.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;

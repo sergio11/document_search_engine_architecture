@@ -20,16 +20,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-oauth2-resource-server</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-oauth2-jose</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>document_search_engine_files_commons</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
@@ -49,7 +42,7 @@
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.4.13</version>
-                <executions>
+                <!--<executions>
                     <execution>
                         <id>build-image</id>
                         <phase>package</phase>
@@ -59,7 +52,7 @@
                         <configuration>
                         </configuration>
                     </execution>
-                </executions>
+                </executions>-->
                 <configuration>
                     <repository>ssanchez11/file_search_service</repository>
                     <tag>${project.version}</tag>
