@@ -379,6 +379,18 @@ services:
       - 8500:8500
       - 8600:8600/udp
 
+  # API Gateway Service
+  api_gateway:
+    image: ssanchez11/api_gateway_service:0.0.1-SNAPSHOT
+    container_name: api_gateway
+    restart: unless-stopped
+
+  # File Metadata Service
+  file_metadata_service:
+    image: ssanchez11/file_metadata_service:0.0.1-SNAPSHOT
+    container_name: file_metadata_service
+    restart: unless-stopped
+
 
   
       
