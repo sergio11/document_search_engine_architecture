@@ -8,10 +8,8 @@ import com.dreamsoftware.documentsearchengine.web.core.IResponseCodeTypes;
  */
 public enum FilesSearchResponseCodeEnum implements IResponseCodeTypes {
 
-    GET_FILES_PROCESSED(200L),
-    GET_PROCESSED_FILE_DETAIL(201L),
-    NO_FILES_PROCESSED_FOUND(202L),
-    PROCESSED_FILE_NOT_FOUND(203L);
+    SEARCH_RESULTS(200L),
+    NO_FILES_PROCESSED_FOUND(201L);
 
     private final Long code;
 

@@ -92,10 +92,4 @@ public class ProcessedFileDTO {
     @JsonProperty("last_modified_time")
     private Date lastModifiedTime;
 
-    /**
-     * File Processed At
-     */
-    @JsonProperty("processed_at")
-    private Date processedAt;
-
 }

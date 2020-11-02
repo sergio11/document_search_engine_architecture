@@ -39,12 +39,13 @@ public class FilesSearchController extends SupportController {
      *
      * @param page
      * @param size
+     * @param searchText
      * @return
      * @throws Throwable
      */
-    @Operation(summary = "GET_FILES_PROCESSED - Get Files Processed", description = " Get Files Processed", tags = {"files_search"})
+    @Operation(summary = "SEARCH_FILES_PROCESSED - Search Files Processed", description = "Search Files Processed", tags = {"files_search"})
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Files proccessed List",
+        @ApiResponse(responseCode = "200", description = "Search results",
                 content = @Content(
                         schema = @Schema(implementation = Page.class))),
         @ApiResponse(responseCode = "404", description = "No Files found",
@@ -52,18 +53,18 @@ public class FilesSearchController extends SupportController {
                         schema = @Schema(implementation = ErrorResponseDTO.class)))
     })
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<APIResponse<Page<ProcessedFileDTO>>> getFilesProcessed(
+    public ResponseEntity<APIResponse<Page<ProcessedFileDTO>>> searchFilesProcessed(
             @RequestParam(name = "page", required = false, defaultValue = "0") final Integer page,
-            @RequestParam(name = "size", required = false, defaultValue = "20") final Integer size) throws Throwable {
+            @RequestParam(name = "size", required = false, defaultValue = "20") final Integer size,
+            @RequestParam(name = "search", required = true) final String searchText) throws Throwable {
 
-        final Page<ProcessedFileDTO> filesProcessedPage = filesProcessedService.findPaginated(page, size);
+        final Page<ProcessedFileDTO> filesProcessedPage = filesProcessedService.search(searchText, page, size);
 
         if (!filesProcessedPage.hasContent()) {
             throw new NoFilesProcessedFoundException();
         }
 
-        return responseHelper.createAndSendResponse(
-                FilesSearchResponseCodeEnum.GET_FILES_PROCESSED,
+        return responseHelper.createAndSendResponse(FilesSearchResponseCodeEnum.SEARCH_RESULTS,
                 HttpStatus.OK, filesProcessedPage);
 
     }

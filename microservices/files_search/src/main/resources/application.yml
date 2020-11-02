@@ -9,13 +9,21 @@ spring:
             port: 8080
             prefer-ip-address: true
             healthCheckPath: /actuator/health
-
 ## Spring Open API
 springdoc:
     swagger-ui:
         path: /swagger-ui.html
     api-docs:
         path: /api-docs
+
+elasticsearch:
+    host: localhost:9200
+    cert:
+        file: elastic-certificates.p12
+        password: ssanchez00
+    user:
+        name: elastic
+        pass: ssanchez00
 
 logging.level:
   org.springframework.cloud.gateway: DEBUG
