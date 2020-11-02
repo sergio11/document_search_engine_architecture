@@ -24,8 +24,10 @@ spring:
 
 ## Spring Open API
 springdoc:
-    swagger-ui.path: /swagger-ui.html
-    api-docs.path: /api-docs
+    swagger-ui:
+        path: /swagger-ui.html
+    api-docs:
+        path: /api-docs
 
 logging.level:
   org.springframework.cloud.gateway: DEBUG

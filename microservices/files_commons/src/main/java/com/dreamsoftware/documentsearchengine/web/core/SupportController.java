@@ -1,4 +1,4 @@
-package com.dreamsoftware.documentserachengine.web.core;
+package com.dreamsoftware.documentsearchengine.web.core;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

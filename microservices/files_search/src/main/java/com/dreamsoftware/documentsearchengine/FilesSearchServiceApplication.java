@@ -1,13 +1,13 @@
-package com.dreamsoftware.documentsearchengine.security.callme;
+package com.dreamsoftware.documentsearchengine;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FilesSearchApplication {
+public class FilesSearchServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FilesSearchApplication.class, args);
+        SpringApplication.run(FilesSearchServiceApplication.class, args);
     }
 
 }

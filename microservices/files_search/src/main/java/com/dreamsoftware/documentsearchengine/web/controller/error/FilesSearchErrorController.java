@@ -1,6 +1,6 @@
 package com.dreamsoftware.documentsearchengine.web.controller.error;
 
-import com.dreamsoftware.documentsearchengine.web.controller.FilesMetadataResponseCodeEnum;
+import com.dreamsoftware.documentsearchengine.web.controller.FilesSearchResponseCodeEnum;
 import com.dreamsoftware.documentsearchengine.web.controller.error.exception.FileProcessedNotFoundException;
 import com.dreamsoftware.documentsearchengine.web.controller.error.exception.NoFilesProcessedFoundException;
 import com.dreamsoftware.documentsearchengine.web.core.APIResponse;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class FilesMetadataErrorController extends SupportController {
+public class FilesSearchErrorController extends SupportController {
 
     /**
      *
@@ -32,7 +32,7 @@ public class FilesMetadataErrorController extends SupportController {
     @ExceptionHandler(FileProcessedNotFoundException.class)
     @ResponseBody
     protected ResponseEntity<APIResponse<ErrorResponseDTO>> handleFileProcessedNotFoundException(FileProcessedNotFoundException ex, HttpServletRequest request) {
-        return responseHelper.<String>createAndSendErrorResponse(FilesMetadataResponseCodeEnum.PROCESSED_FILE_NOT_FOUND,
+        return responseHelper.<String>createAndSendErrorResponse(FilesSearchResponseCodeEnum.PROCESSED_FILE_NOT_FOUND,
                 HttpStatus.NOT_FOUND, "File Proccessed Not Found");
     }
 
@@ -45,7 +45,7 @@ public class FilesMetadataErrorController extends SupportController {
     @ExceptionHandler(NoFilesProcessedFoundException.class)
     @ResponseBody
     protected ResponseEntity<APIResponse<ErrorResponseDTO>> handleNoFilesProcessedFoundException(NoFilesProcessedFoundException ex, HttpServletRequest request) {
-        return responseHelper.<String>createAndSendErrorResponse(FilesMetadataResponseCodeEnum.NO_FILES_PROCESSED_FOUND,
+        return responseHelper.<String>createAndSendErrorResponse(FilesSearchResponseCodeEnum.NO_FILES_PROCESSED_FOUND,
                 HttpStatus.NOT_FOUND, "No Files Processed.");
     }
 
