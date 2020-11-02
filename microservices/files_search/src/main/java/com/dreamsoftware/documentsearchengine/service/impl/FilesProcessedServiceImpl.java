@@ -4,7 +4,6 @@ import com.dreamsoftware.documentsearchengine.mapper.ProcessedFileMapper;
 import com.dreamsoftware.documentsearchengine.persistance.repository.FilesProcessedRepository;
 import com.dreamsoftware.documentsearchengine.service.IFilesProcessedService;
 import com.dreamsoftware.documentsearchengine.web.dto.ProcessedFileDTO;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,28 +24,29 @@ public class FilesProcessedServiceImpl implements IFilesProcessedService {
 
     /**
      *
+     * @param searchText
      * @param page
      * @param size
      * @return
      */
     @Override
-    public Page<ProcessedFileDTO> findPaginated(Integer page, Integer size) {
+    public Page<ProcessedFileDTO> search(final String searchText, final Integer page, final Integer size) {
         Assert.notNull(page, "Page can not be null");
         Assert.notNull(size, "Size can not be null");
-        return findPaginated(PageRequest.of(page, size));
+        return search(searchText, PageRequest.of(page, size));
     }
 
+    /**
+     *
+     * @param searchText
+     * @param pageable
+     * @return
+     */
     @Override
-    public Page<ProcessedFileDTO> findPaginated(Pageable pageable) {
+    public Page<ProcessedFileDTO> search(final String searchText, final Pageable pageable) {
         Assert.notNull(pageable, "Pageable can not be null");
-
-        return filesProcessedRepository.findAll(pageable)
+        return filesProcessedRepository.search(searchText, pageable)
                 .map(processedFileMapper::entityToDTO);
-    }
-
-    @Override
-    public Optional<ProcessedFileDTO> findById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

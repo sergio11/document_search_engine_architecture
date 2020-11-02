@@ -1,7 +1,6 @@
 package com.dreamsoftware.documentsearchengine.web.controller.error;
 
 import com.dreamsoftware.documentsearchengine.web.controller.FilesSearchResponseCodeEnum;
-import com.dreamsoftware.documentsearchengine.web.controller.error.exception.FileProcessedNotFoundException;
 import com.dreamsoftware.documentsearchengine.web.controller.error.exception.NoFilesProcessedFoundException;
 import com.dreamsoftware.documentsearchengine.web.core.APIResponse;
 import com.dreamsoftware.documentsearchengine.web.core.ErrorResponseDTO;
@@ -22,19 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class FilesSearchErrorController extends SupportController {
-
-    /**
-     *
-     * @param ex
-     * @param request
-     * @return
-     */
-    @ExceptionHandler(FileProcessedNotFoundException.class)
-    @ResponseBody
-    protected ResponseEntity<APIResponse<ErrorResponseDTO>> handleFileProcessedNotFoundException(FileProcessedNotFoundException ex, HttpServletRequest request) {
-        return responseHelper.<String>createAndSendErrorResponse(FilesSearchResponseCodeEnum.PROCESSED_FILE_NOT_FOUND,
-                HttpStatus.NOT_FOUND, "File Proccessed Not Found");
-    }
 
     /**
      *

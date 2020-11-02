@@ -38,6 +38,18 @@ public class ProcessedFileEntity {
     private Integer version;
 
     /**
+     * File Created At
+     */
+    @Field(name = "document.metadata.created", type = FieldType.Date, format = DateFormat.date_time_no_millis)
+    private Date createdAt;
+
+    /**
+     * Processed At
+     */
+    /*@Field(name = "document.document.processed_at", type = FieldType.Date,
+            format = DateFormat.custom, pattern = "EEE MMM d HH:mm:ss z yyyy")
+    private Date processedAt;*/
+    /**
      * File Language
      */
     @Field(name = "document.metadata.language", type = FieldType.Text)
@@ -60,5 +72,41 @@ public class ProcessedFileEntity {
      */
     @Field(name = "document.metadata.producer", type = FieldType.Text)
     private String producer;
+
+    /**
+     * File UUID
+     */
+    @Field(name = "document.attrs.uuid", type = FieldType.Text)
+    private String uuid;
+
+    /**
+     * File Name
+     */
+    @Field(name = "document.attrs.filename", type = FieldType.Text)
+    private String name;
+
+    /**
+     * File Permissions
+     */
+    @Field(name = "document.attrs.file_permissions", type = FieldType.Text)
+    private String permissions;
+
+    /**
+     * File Mime Type
+     */
+    @Field(name = "document.attrs.mime_type", type = FieldType.Text)
+    private String mimeType;
+
+    /**
+     * File Mime Extension
+     */
+    @Field(name = "document.attrs.mime_extension", type = FieldType.Text)
+    private String mimeExtension;
+
+    /**
+     * File Last Modified Time
+     */
+    @Field(name = "document.attrs.file_lastModifiedTime", type = FieldType.Date, format = DateFormat.date_time_no_millis)
+    private Date lastModifiedTime;
 
 }
