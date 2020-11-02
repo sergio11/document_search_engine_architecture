@@ -1,4 +1,4 @@
-package com.dreamsoftware.documentserachengine.web.core;
+package com.dreamsoftware.documentsearchengine.web.core;
 
 import java.util.Arrays;
 import java.util.HashMap;

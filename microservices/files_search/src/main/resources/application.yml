@@ -3,21 +3,24 @@ spring:
     name: files-search-service
   cloud:
     consul:
-        host: consul
+        host: localhost
         port: 8500
         discovery:
             port: 8080
             prefer-ip-address: true
             healthCheckPath: /actuator/health
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8090/auth/realms/document_search_engine
+
+## Spring Open API
+springdoc:
+    swagger-ui:
+        path: /swagger-ui.html
+    api-docs:
+        path: /api-docs
 
 logging.level:
   org.springframework.cloud.gateway: DEBUG
   org.springframework.security: DEBUG
   org.springframework.web.reactive.function.client: TRACE
+  com.dreamsoftware.documentsearchengine: DEBUG
 
 server.port: 8080

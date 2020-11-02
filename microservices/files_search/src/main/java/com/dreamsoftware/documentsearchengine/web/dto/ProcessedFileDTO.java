@@ -21,7 +21,10 @@ public class ProcessedFileDTO {
      * File Id
      */
     @JsonProperty("id")
-    private Long id;
+    private String id;
+
+    @JsonProperty("version")
+    private Integer version;
 
     /**
      * File UUID

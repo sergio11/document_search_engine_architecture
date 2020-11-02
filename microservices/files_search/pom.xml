@@ -24,6 +24,11 @@
             <artifactId>document_search_engine_files_commons</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!-- Persistence -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        </dependency>
     </dependencies>
 
 

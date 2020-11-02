@@ -1,5 +1,9 @@
 package com.dreamsoftware.documentsearchengine.persistence.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,6 +13,10 @@ import org.springframework.data.mongodb.core.mapping.Field;
  *
  * @author ssanchez
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection = ProcessedFileEntity.COLLECTION_NAME)
 public class ProcessedFileEntity {
 

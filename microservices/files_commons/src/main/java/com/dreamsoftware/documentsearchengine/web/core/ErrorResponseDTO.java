@@ -1,4 +1,4 @@
-package com.dreamsoftware.documentserachengine.web.core;
+package com.dreamsoftware.documentsearchengine.web.core;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;

@@ -7,7 +7,6 @@ import com.dreamsoftware.documentsearchengine.web.core.APIResponse;
 import com.dreamsoftware.documentsearchengine.web.core.ErrorResponseDTO;
 import com.dreamsoftware.documentsearchengine.web.core.SupportController;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -19,7 +18,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,11 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Validated
-@RequestMapping("/api/v1/metadata/")
-@Tag(name = "files_metadata", description = "/api/v1/metadata/ (Code Response interval -> 1XX)")
+@RequestMapping("/api/v1/search/")
+@Tag(name = "files_search", description = "/api/v1/search/ (Code Response interval -> 2XX)")
 @RequiredArgsConstructor
-public class FilesMetadataController extends SupportController {
+public class FilesSearchController extends SupportController {
 
+    /**
+     * Files Processed Service
+     */
     private final IFilesProcessedService filesProcessedService;
 
     /**
@@ -41,7 +42,7 @@ public class FilesMetadataController extends SupportController {
      * @return
      * @throws Throwable
      */
-    @Operation(summary = "GET_FILES_PROCESSED - Get Files Processed", description = " Get Files Processed", tags = {"files_metadata"})
+    @Operation(summary = "GET_FILES_PROCESSED - Get Files Processed", description = " Get Files Processed", tags = {"files_search"})
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Files proccessed List",
                 content = @Content(
@@ -62,24 +63,8 @@ public class FilesMetadataController extends SupportController {
         }
 
         return responseHelper.createAndSendResponse(
-                FilesMetadataResponseCodeEnum.GET_FILES_PROCESSED,
+                FilesSearchResponseCodeEnum.GET_FILES_PROCESSED,
                 HttpStatus.OK, filesProcessedPage);
 
-    }
-
-    /**
-     *
-     * @param id
-     * @return
-     * @throws Throwable
-     */
-    @Operation(summary = "GET_PROCESSED_FILE_DETAIL - Get Processed File Detail", description = "Get Processed File Detail", tags = {"files_metadata"})
-    @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<APIResponse<ProcessedFileDTO>> getProcessedFileById(
-            @Parameter(name = "id", description = "Processed File Id", required = true)
-            @PathVariable final Long id) throws Throwable {
-
-        return null;
     }
 }
