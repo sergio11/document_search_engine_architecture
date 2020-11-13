@@ -21,7 +21,7 @@ public class ProcessedFileDTO {
      * File Id
      */
     @JsonProperty("id")
-    private Long id;
+    private String id;
 
     /**
      * File UUID
@@ -57,7 +57,7 @@ public class ProcessedFileDTO {
      * File Created At
      */
     @JsonProperty("created_at")
-    private Date createdAt;
+    private String createdAt;
 
     /**
      * File Language
@@ -87,12 +87,12 @@ public class ProcessedFileDTO {
      * File Last Modified Time
      */
     @JsonProperty("last_modified_time")
-    private Date lastModifiedTime;
+    private String lastModifiedTime;
 
     /**
      * File Processed At
      */
     @JsonProperty("processed_at")
-    private Date processedAt;
+    private String processedAt;
 
 }

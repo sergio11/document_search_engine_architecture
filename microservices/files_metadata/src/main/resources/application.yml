@@ -3,21 +3,17 @@ spring:
     name: files-metadata-service
   cloud:
     consul:
-        host: consul
+        host: 127.0.0.1
         port: 8500
         discovery:
             port: 8080
             prefer-ip-address: true
             healthCheckPath: /actuator/health
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8090/auth/realms/document_search_engine
   data:
     mongodb:
+        authentication-database: admin
         database: files
-        host: mongo
+        host: 127.0.0.1
         port: 27017
         username: devroot
         password: devroot
@@ -34,4 +30,4 @@ logging.level:
   org.springframework.security: DEBUG
   org.springframework.web.reactive.function.client: TRACE
 
-server.port: 8080
+server.port: 8081

@@ -5,8 +5,12 @@ import com.dreamsoftware.documentsearchengine.web.controller.error.exception.Fil
 import com.dreamsoftware.documentsearchengine.web.controller.error.exception.NoFilesProcessedFoundException;
 import com.dreamsoftware.documentsearchengine.web.core.APIResponse;
 import com.dreamsoftware.documentsearchengine.web.core.ErrorResponseDTO;
+import com.dreamsoftware.documentsearchengine.web.core.FieldErrorDTO;
 import com.dreamsoftware.documentsearchengine.web.core.SupportController;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolationException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -22,6 +26,29 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class FilesMetadataErrorController extends SupportController {
+
+    /**
+     * Handler for Constraint Violation Exception
+     *
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseBody
+    public ResponseEntity<APIResponse<ErrorResponseDTO>> handleConstraintViolationException(ConstraintViolationException ex) {
+
+        List<FieldErrorDTO> fieldErrors = ex.getConstraintViolations().stream()
+                .map(constraintViolation -> FieldErrorDTO.builder()
+                .field(constraintViolation.getPropertyPath().toString())
+                .message(constraintViolation.getMessage())
+                .build())
+                .collect(Collectors.toList());
+
+        return responseHelper.createAndSendErrorResponse(
+                FilesMetadataResponseCodeEnum.VALIDATION_ERROR,
+                HttpStatus.BAD_REQUEST, fieldErrors);
+
+    }
 
     /**
      *
