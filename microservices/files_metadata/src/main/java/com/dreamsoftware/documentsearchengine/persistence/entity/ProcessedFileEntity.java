@@ -1,5 +1,6 @@
 package com.dreamsoftware.documentsearchengine.persistence.entity;
 
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

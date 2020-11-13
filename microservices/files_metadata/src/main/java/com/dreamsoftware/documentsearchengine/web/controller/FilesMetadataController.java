@@ -1,11 +1,13 @@
 package com.dreamsoftware.documentsearchengine.web.controller;
 
 import com.dreamsoftware.documentsearchengine.service.IFilesProcessedService;
+import com.dreamsoftware.documentsearchengine.web.controller.error.exception.FileProcessedNotFoundException;
 import com.dreamsoftware.documentsearchengine.web.controller.error.exception.NoFilesProcessedFoundException;
 import com.dreamsoftware.documentsearchengine.web.dto.ProcessedFileDTO;
 import com.dreamsoftware.documentsearchengine.web.core.APIResponse;
 import com.dreamsoftware.documentsearchengine.web.core.ErrorResponseDTO;
 import com.dreamsoftware.documentsearchengine.web.core.SupportController;
+import com.dreamsoftware.documentsearchengine.web.validators.ValidObjectId;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -13,7 +15,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,6 +29,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Files Metadata Controller
+ *
+ * @author ssanchez
+ */
 @RestController
 @Validated
 @RequestMapping("/api/v1/metadata/")
@@ -78,8 +87,14 @@ public class FilesMetadataController extends SupportController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<APIResponse<ProcessedFileDTO>> getProcessedFileById(
             @Parameter(name = "id", description = "Processed File Id", required = true)
-            @PathVariable final Long id) throws Throwable {
+            @PathVariable @Valid @ValidObjectId(message = "Invalid Id Format") final String id) throws Throwable {
 
-        return null;
+        // Find file by id
+        final ProcessedFileDTO processedFile = filesProcessedService.findById(new ObjectId(id))
+                .orElseThrow(FileProcessedNotFoundException::new);
+
+        return responseHelper.createAndSendResponse(
+                FilesMetadataResponseCodeEnum.GET_PROCESSED_FILE_DETAIL,
+                HttpStatus.OK, processedFile);
     }
 }

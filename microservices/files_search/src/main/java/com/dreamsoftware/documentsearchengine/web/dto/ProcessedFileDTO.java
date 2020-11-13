@@ -23,6 +23,9 @@ public class ProcessedFileDTO {
     @JsonProperty("id")
     private String id;
 
+    /**
+     * Version
+     */
     @JsonProperty("version")
     private Integer version;
 

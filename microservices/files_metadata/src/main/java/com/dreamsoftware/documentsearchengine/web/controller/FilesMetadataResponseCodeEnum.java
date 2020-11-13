@@ -11,7 +11,8 @@ public enum FilesMetadataResponseCodeEnum implements IResponseCodeTypes {
     GET_FILES_PROCESSED(100L),
     GET_PROCESSED_FILE_DETAIL(101L),
     NO_FILES_PROCESSED_FOUND(102L),
-    PROCESSED_FILE_NOT_FOUND(103L);
+    PROCESSED_FILE_NOT_FOUND(103L),
+    VALIDATION_ERROR(104L);
 
     private final Long code;
 
