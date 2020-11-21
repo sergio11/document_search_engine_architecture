@@ -406,6 +406,15 @@ services:
     ports:
       - 8093:8080
 
+  # File API Gateway Service
+  files_api_gateway_service:
+    image: ssanchez11/files_api_gateway_service:0.0.1-SNAPSHOT
+    container_name: files_api_gateway_service
+    restart: unless-stopped
+    ports:
+      - 8094:8080
+
+
 
   
       

@@ -11,7 +11,7 @@ WORKDIR /usr/src/app
 
 
 COPY resources/wait-for-it.sh  wait-for-it.sh
-COPY target/api_gateway_service.jar app.jar
+COPY target/files_api_gateway_service.jar app.jar
 
 RUN dos2unix wait-for-it.sh
 RUN chmod +x wait-for-it.sh

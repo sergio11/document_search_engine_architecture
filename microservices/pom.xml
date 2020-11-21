@@ -23,7 +23,7 @@
     </parent>
 
     <modules>
-        <module>gateway</module>
+        <module>files_api_gateway</module>
         <module>files_metadata</module>
         <module>files_management</module>
         <module>files_search</module>

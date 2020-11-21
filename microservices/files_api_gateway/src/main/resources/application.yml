@@ -1,0 +1,77 @@
+spring:
+  application:
+    name: files-api-gateway-service
+  cloud:
+    consul:
+        enabled: true
+        host: consul-server
+        port: 8500
+        discovery:
+            register: false
+            registerHealthCheck: false
+    gateway:
+        discovery:
+            locator:
+                enabled: true
+        # default-filters:
+        #    - TokenRelay
+        routes:
+            - id: files-metadata-service
+              uri: lb://files-metadata-service
+              predicates:
+                - Path=/metadata/**
+              filters:
+                - RemoveRequestHeader=Cookie
+                - RewritePath=/metadata/(?<path>.*), /api/v1/metadata/$\{path}
+            - id: files-metadata-service-swagger
+              uri: lb://files-metadata-service
+              predicates:
+                - Path=/swagger-metadata-ui.html
+              filters:
+                - RemoveRequestHeader=Cookie
+                - RewritePath=/swagger-metadata-ui.html, /swagger-ui.html
+            - id: files-search-service
+              uri: lb://files-search-service
+              predicates:
+                - Path=/search/**
+              filters:
+                - RemoveRequestHeader=Cookie
+                - RewritePath=/search/(?<path>.*), /api/v1/search/$\{path}
+            - id: files-search-service-swagger
+              uri: lb://files-search-service
+              predicates:
+                - Path=/swagger-search-ui.html
+              filters:
+                - RemoveRequestHeader=Cookie
+                - RewritePath=/swagger-search-ui.html, /swagger-ui.html
+            - id: files-management-service
+              uri: lb://files-management-service
+              predicates:
+                - Path=/management/**
+              filters:
+                - RemoveRequestHeader=Cookie
+                - RewritePath=/management/(?<path>.*), /api/v1/management/$\{path}
+            - id: files-management-service-swagger
+              uri: lb://files-management-service
+              predicates:
+                - Path=/swagger-management-ui.html
+              filters:
+                - RemoveRequestHeader=Cookie
+                - RewritePath=/swagger-management-ui.html, /swagger-ui.html
+            - id: openapi
+              uri: http://localhost:${server.port}
+              predicates:
+                - Path=/v3/api-docs/**
+              filters:
+                - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+
+
+server.port: 8080
+
+security:
+    ignored: /**
+
+logging.level:
+  org.springframework.cloud.gateway: DEBUG
+  org.springframework.security: DEBUG
+  org.springframework.web.reactive.function.client: TRACE
