@@ -63,4 +63,18 @@ public class FilesProcessedServiceImpl implements IFilesProcessedService {
                 .map(processedFileMapper::entityToDTO);
     }
 
+    /**
+     * Find By Name
+     *
+     * @param name
+     * @return
+     */
+    @Override
+    public Optional<ProcessedFileDTO> findByName(final String name) {
+        Assert.notNull(name, "File name can not be null");
+
+        return filesProcessedRepository.findOneByName(name)
+                .map(processedFileMapper::entityToDTO);
+    }
+
 }
