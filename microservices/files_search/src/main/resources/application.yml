@@ -3,7 +3,7 @@ spring:
     name: files-search-service
   cloud:
     consul:
-        host: localhost
+        host: consul-server
         port: 8500
         discovery:
             port: 8080
@@ -17,7 +17,7 @@ springdoc:
         path: /api-docs
 
 elasticsearch:
-    host: localhost:9200
+    host: elasticsearch:9200
     cert:
         file: elastic-certificates.p12
         password: ssanchez00

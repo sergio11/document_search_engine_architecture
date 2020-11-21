@@ -1,5 +1,6 @@
 package com.dreamsoftware.documentsearchengine.service.impl;
 
+import com.dreamsoftware.documentsearchengine.client.IFilesMetadataClient;
 import com.dreamsoftware.documentsearchengine.config.props.SFTPProperties;
 import com.dreamsoftware.documentsearchengine.config.props.UploadProperties;
 import com.dreamsoftware.documentsearchengine.service.IFilesManagementService;
@@ -11,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.sftp.SFTPClient;
 import net.schmizz.sshj.transport.verification.PromiscuousVerifier;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -28,11 +28,9 @@ public class FilesManagementServiceImpl implements IFilesManagementService {
 
     private static final Logger logger = LoggerFactory.getLogger(FilesManagementServiceImpl.class);
 
-    /**
-     * Properties
-     */
     private final UploadProperties uploadProperties;
     private final SFTPProperties sftpProperties;
+    private final IFilesMetadataClient filesMetadataClient;
 
     /**
      * Save File
@@ -49,7 +47,7 @@ public class FilesManagementServiceImpl implements IFilesManagementService {
             // Ensure Folder For Uploads
             ensureFolderForUploads();
             // Get new file to save bytes
-            File fileToSave = getFileToSave(uploadFile.getContentType());
+            File fileToSave = getFileToSave(uploadFile.getOriginalFilename());
 
             logger.debug("File To Save Path -> " + fileToSave.getAbsolutePath());
             logger.debug("File To Save -> " + fileToSave.getName());
@@ -88,13 +86,11 @@ public class FilesManagementServiceImpl implements IFilesManagementService {
     /**
      * Get File To Save
      *
-     * @param contentType
+     * @param originalName
      * @return
      */
-    private File getFileToSave(String contentType) {
-        String name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(50),
-                contentType.substring(contentType.indexOf("/") + 1));
-        return new File(uploadProperties.getUploadsDirectory(), name);
+    private File getFileToSave(String originalName) {
+        return new File(uploadProperties.getUploadsDirectory(), originalName);
     }
 
     /**

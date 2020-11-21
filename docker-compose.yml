@@ -382,17 +382,29 @@ services:
       - 8500:8500
       - 8600:8600/udp
 
-  # API Gateway Service
-  api_gateway:
-    image: ssanchez11/api_gateway_service:0.0.1-SNAPSHOT
-    container_name: api_gateway
+  # File Management Service
+  file_management_service:
+    image: ssanchez11/file_management_service:0.0.1-SNAPSHOT
+    container_name: file_management_service
     restart: unless-stopped
+    ports:
+      - 8091:8080
 
   # File Metadata Service
   file_metadata_service:
     image: ssanchez11/file_metadata_service:0.0.1-SNAPSHOT
     container_name: file_metadata_service
     restart: unless-stopped
+    ports:
+      - 8092:8080
+
+  # File Search Service
+  file_search_service:
+    image: ssanchez11/file_search_service:0.0.1-SNAPSHOT
+    container_name: file_search_service
+    restart: unless-stopped
+    ports:
+      - 8093:8080
 
 
   

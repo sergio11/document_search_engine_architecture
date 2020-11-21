@@ -3,7 +3,7 @@ spring:
     name: files-management-service
   cloud:
     consul:
-        host: 127.0.0.1
+        host: consul-server
         port: 8500
         discovery:
             port: 8080
@@ -12,8 +12,8 @@ spring:
 
 ## SFTP Config
 sftp:
-    hostname: localhost
-    port: 2222
+    hostname: sftp
+    port: 22
     username: ssanchez
     password: ssanchez00
     remoteFolder: uploads/
