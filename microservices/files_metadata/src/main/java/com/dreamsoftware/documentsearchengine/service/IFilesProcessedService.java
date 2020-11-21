@@ -34,4 +34,11 @@ public interface IFilesProcessedService {
      */
     Optional<ProcessedFileDTO> findById(final ObjectId id);
 
+    /**
+     *
+     * @param name
+     * @return
+     */
+    Optional<ProcessedFileDTO> findByName(final String name);
+
 }

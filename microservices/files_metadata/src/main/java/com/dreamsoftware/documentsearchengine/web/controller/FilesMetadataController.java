@@ -97,4 +97,28 @@ public class FilesMetadataController extends SupportController {
                 FilesMetadataResponseCodeEnum.GET_PROCESSED_FILE_DETAIL,
                 HttpStatus.OK, processedFile);
     }
+
+    /**
+     * Get Processed File By Name
+     *
+     * @param name
+     * @return
+     * @throws Throwable
+     */
+    @Operation(summary = "GET_PROCESSED_FILE_DETAIL_BY_NAME - Get Processed File Detail By Name", description = "Get Processed File Detail By Name", tags = {"files_metadata"})
+    @RequestMapping(value = {"/name/{name}"}, method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<APIResponse<ProcessedFileDTO>> getProcessedFileByName(
+            @Parameter(name = "name", description = "Processed File Name", required = true)
+            @PathVariable final String name) throws Throwable {
+
+        // Find file by name
+        final ProcessedFileDTO processedFile = filesProcessedService.findByName(name)
+                .orElseThrow(FileProcessedNotFoundException::new);
+
+        return responseHelper.createAndSendResponse(
+                FilesMetadataResponseCodeEnum.GET_PROCESSED_FILE_DETAIL,
+                HttpStatus.OK, processedFile);
+    }
+
 }
