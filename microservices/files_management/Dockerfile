@@ -21,4 +21,4 @@ RUN ls -al
 
 EXPOSE ${PORT}
 
-CMD ["sh", "-c", "echo 'waiting for 300 seconds for consul-agent:8500 to be accessable before starting application' && ./wait-for-it.sh -t 300 consul:8500 -- java -jar app.jar"]
+CMD ["sh", "-c", "echo 'waiting for 300 seconds for consul-server:8500 to be accessable before starting application' && ./wait-for-it.sh -t 300 consul:8500 -- java -jar app.jar"]

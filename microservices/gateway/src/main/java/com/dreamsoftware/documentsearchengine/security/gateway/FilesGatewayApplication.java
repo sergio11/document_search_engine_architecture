@@ -14,12 +14,12 @@ import org.springframework.web.server.WebSession;
 
 @SpringBootApplication
 @RestController
-public class GatewayApplication {
+public class FilesGatewayApplication {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(GatewayApplication.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FilesGatewayApplication.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(GatewayApplication.class, args);
+        SpringApplication.run(FilesGatewayApplication.class, args);
     }
 
     @GetMapping(value = "/token")

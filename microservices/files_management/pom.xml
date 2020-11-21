@@ -47,7 +47,7 @@
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.4.13</version>
-                <!--<executions>
+                <executions>
                     <execution>
                         <id>build-image</id>
                         <phase>package</phase>
@@ -57,7 +57,7 @@
                         <configuration>
                         </configuration>
                     </execution>
-                </executions>-->
+                </executions>
                 <configuration>
                     <repository>ssanchez11/file_management_service</repository>
                     <tag>${project.version}</tag>

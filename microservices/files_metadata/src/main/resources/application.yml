@@ -3,7 +3,7 @@ spring:
     name: files-metadata-service
   cloud:
     consul:
-        host: 127.0.0.1
+        host: consul-server
         port: 8500
         discovery:
             port: 8080
@@ -13,7 +13,7 @@ spring:
     mongodb:
         authentication-database: admin
         database: files
-        host: 127.0.0.1
+        host: mongo
         port: 27017
         username: devroot
         password: devroot
@@ -31,4 +31,4 @@ logging.level:
   com.dreamsoftware.documentsearchengine: DEBUG
   org.springframework.web.reactive.function.client: TRACE
 
-server.port: 8081
+server.port: 8080
