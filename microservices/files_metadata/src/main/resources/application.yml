@@ -28,6 +28,7 @@ springdoc:
 logging.level:
   org.springframework.cloud.gateway: DEBUG
   org.springframework.security: DEBUG
+  com.dreamsoftware.documentsearchengine: DEBUG
   org.springframework.web.reactive.function.client: TRACE
 
 server.port: 8081

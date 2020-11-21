@@ -24,6 +24,12 @@
             <artifactId>document_search_engine_files_commons</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.hierynomus</groupId>
+            <artifactId>sshj</artifactId>
+            <version>0.27.0</version>
+        </dependency>
     </dependencies>
 
 

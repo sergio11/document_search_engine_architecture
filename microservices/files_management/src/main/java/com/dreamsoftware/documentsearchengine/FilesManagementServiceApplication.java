@@ -1,4 +1,4 @@
-package com.dreamsoftware.documentsearchengine.security.callme;
+package com.dreamsoftware.documentsearchengine;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -3,21 +3,36 @@ spring:
     name: files-management-service
   cloud:
     consul:
-        host: consul
+        host: 127.0.0.1
         port: 8500
         discovery:
             port: 8080
             prefer-ip-address: true
             healthCheckPath: /actuator/health
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8090/auth/realms/document_search_engine
+
+## SFTP Config
+sftp:
+    hostname: localhost
+    port: 2222
+    username: ssanchez
+    password: ssanchez00
+    remoteFolder: uploads/
+
+## Uploads Config
+uploads:
+    directory: /opt/uploads
+
+## Spring Open API
+springdoc:
+    swagger-ui:
+        path: /swagger-ui.html
+    api-docs:
+        path: /api-docs
 
 logging.level:
   org.springframework.cloud.gateway: DEBUG
   org.springframework.security: DEBUG
+  com.dreamsoftware.documentsearchengine: DEBUG
   org.springframework.web.reactive.function.client: TRACE
 
 server.port: 8080
