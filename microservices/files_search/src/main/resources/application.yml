@@ -1,6 +1,11 @@
 spring:
   application:
     name: files-search-service
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://keycloak:8080/auth/realms/document_search_engine
   cloud:
     consul:
         host: consul-server

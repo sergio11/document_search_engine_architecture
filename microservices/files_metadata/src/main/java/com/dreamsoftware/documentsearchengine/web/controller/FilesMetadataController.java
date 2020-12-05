@@ -22,6 +22,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,6 +60,7 @@ public class FilesMetadataController extends SupportController {
                 content = @Content(
                         schema = @Schema(implementation = ErrorResponseDTO.class)))
     })
+    @PreAuthorize("hasAuthority('SCOPE_FILES_METADATA')")
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<APIResponse<Page<ProcessedFileDTO>>> getFilesProcessed(
             @RequestParam(name = "page", required = false, defaultValue = "0") final Integer page,
@@ -83,6 +85,7 @@ public class FilesMetadataController extends SupportController {
      * @throws Throwable
      */
     @Operation(summary = "GET_PROCESSED_FILE_DETAIL - Get Processed File Detail", description = "Get Processed File Detail", tags = {"files_metadata"})
+    @PreAuthorize("hasAuthority('SCOPE_FILES_METADATA')")
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<APIResponse<ProcessedFileDTO>> getProcessedFileById(
@@ -106,6 +109,7 @@ public class FilesMetadataController extends SupportController {
      * @throws Throwable
      */
     @Operation(summary = "GET_PROCESSED_FILE_DETAIL_BY_NAME - Get Processed File Detail By Name", description = "Get Processed File Detail By Name", tags = {"files_metadata"})
+    @PreAuthorize("hasAuthority('SCOPE_FILES_METADATA')")
     @RequestMapping(value = {"/name/{name}"}, method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<APIResponse<ProcessedFileDTO>> getProcessedFileByName(
