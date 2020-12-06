@@ -16,7 +16,6 @@ RUN apt-get update \
     && grep "^X11UseLocalhost" /etc/ssh/sshd_config || echo "X11UseLocalhost no" >> /etc/ssh/sshd_config
 
 RUN echo 'root:ssanchez00' | chpasswd
-RUN echo "ssanchezpc" > /etc/hostname
 
 ## Install OpenJDK 8
 RUN apt-get install -y --no-install-recommends software-properties-common
