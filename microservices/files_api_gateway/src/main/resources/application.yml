@@ -7,20 +7,20 @@ spring:
         provider:
           keycloak:
             token-uri: http://keycloak:8080/auth/realms/document_search_engine/protocol/openid-connect/token
-            authorization-uri: http://localhost:8090/auth/realms/document_search_engine/protocol/openid-connect/auth
+            authorization-uri: http://keycloak:8080/auth/realms/document_search_engine/protocol/openid-connect/auth
             userinfo-uri: http://keycloak:8080/auth/realms/document_search_engine/protocol/openid-connect/userinfo
             user-name-attribute: preferred_username
         registration:
           files-management-client:
             provider: keycloak
             client-id: files-management-client
-            client-secret: 9a7998ba-2ad3-4f6f-8582-410e5221a3f0
+            client-secret: 28dfcecd-c11e-4176-828c-5108edd42782
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
           files-viewing-client:
             provider: keycloak
             client-id: files-viewing-client
-            client-secret: 919d5b8d-f868-4753-9b50-a1f312ad5650
+            client-secret: 7903aa89-d733-43c1-8037-95bd35579737
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
   cloud:
