@@ -29,12 +29,21 @@ volumes:
     driver: local
 
 
+networks:
+  platform_network:
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+
 services:
 
   # Apache Tika Server
   tika_server:
     image: apache/tika:1.24
     container_name: tika_server
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.13
     ports:
       - "9997:9998"
 
@@ -42,6 +51,9 @@ services:
   tika_server_ocr:
     image: apache/tika:1.24-full
     container_name: tika_server_ocr
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.14
     ports:
       - "9998:9998"
 
@@ -52,6 +64,9 @@ services:
     volumes:
       - ./sftp/users.conf:/etc/sftp/users.conf:ro
       - ./sftp/upload:/home/ssanchez/uploads
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.15
     ports:
       - "2222:22"
 
@@ -68,6 +83,9 @@ services:
     volumes:
       - zookeeper-data:/var/lib/zookeeper/data
       - zookeeper-log:/var/lib/zookeeper/log
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.16
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
 
@@ -76,8 +94,6 @@ services:
     build: 
       context: ./nifi
     container_name: nifi
-    ports:
-      - 8080 # Unsecured HTTP Web Port
     volumes:
       - 'apache-nifi_data:/apache/nifi'
     environment:
@@ -86,8 +102,11 @@ services:
       - NIFI_CLUSTER_NODE_PROTOCOL_PORT=8082
       - NIFI_ZK_CONNECT_STRING=zookeeper:2181
       - NIFI_ELECTION_MAX_WAIT=1 min
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.17
     ports:
-      - '8080:8080'
+      - '8099:8080'
 
   namenode:
     image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
@@ -100,6 +119,9 @@ services:
       - hadoop_namenode:/hadoop/dfs/name
     environment:
       - CLUSTER_NAME=test
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.18
     env_file:
       - ./hadoop.env
 
@@ -111,6 +133,9 @@ services:
       - hadoop-datanode-1:/hadoop/dfs/data
     environment:
       SERVICE_PRECONDITION: "namenode:9870"
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.19
     env_file:
       - ./hadoop.env
 
@@ -122,6 +147,9 @@ services:
       - hadoop-datanode-2:/hadoop/dfs/data
     environment:
       SERVICE_PRECONDITION: "namenode:9870"
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.20
     env_file:
       - ./hadoop.env
 
@@ -133,6 +161,9 @@ services:
       - hadoop-datanode-3:/hadoop/dfs/data
     environment:
       SERVICE_PRECONDITION: "namenode:9870"
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.21
     env_file:
       - ./hadoop.env
   
@@ -144,6 +175,9 @@ services:
       SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode1:9864 datanode2:9864 datanode3:9864"
     env_file:
       - ./hadoop.env
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.22
     ports:
       - '8082:8088'
 
@@ -164,6 +198,9 @@ services:
       SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode1:9864 datanode2:9864 datanode3:9864 resourcemanager:8088"
     volumes:
       - hadoop_historyserver:/hadoop/yarn/timeline
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.23
     env_file:
       - ./hadoop.env
 
@@ -191,6 +228,9 @@ services:
       # mechanism will be used.
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.24
     links:
       - zookeeper
 
@@ -220,6 +260,9 @@ services:
     # Kafka REST relies upon Kafka, ZooKeeper
     # This will instruct docker to wait until those services are up
     # before attempting to start Kafka REST.
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.25
     ports:
       - "9999:8082"
     depends_on:
@@ -235,6 +278,9 @@ services:
     container_name: kafka-topics-ui
     ports:
       - "8081:8000"
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.26
     environment:
       # Required. Instructs the UI where it can find the Kafka REST Proxy.
       KAFKA_REST_PROXY_URL: "http://kafka-rest-proxy:8082/"
@@ -252,6 +298,9 @@ services:
     env_file:
       - .env
     restart: always
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.27
     ports:
       - "27017:27017"
     environment:
@@ -278,6 +327,9 @@ services:
       - ME_CONFIG_BASICAUTH_PASSWORD=${MONGOEXPRESS_PASSWORD}
     depends_on:
       - mongo
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.28
     ports:
       - "8084:8081"
 
@@ -293,6 +345,9 @@ services:
       memlock:
         soft: -1
         hard: -1
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.29
     ports:
       - 9200:9200
     volumes:
@@ -308,6 +363,9 @@ services:
       context: ./logstash
       dockerfile: Dockerfile
     container_name: logstash
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.30
     ports:
       - "5000:5000"
       - "9600:9600"
@@ -326,6 +384,9 @@ services:
     environment:
       - ELASTICSEARCH_USERNAME=elastic
       - ELASTICSEARCH_PASSWORD=ssanchez00
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.31
     ports:
       - "5601:5601"
     volumes:
@@ -339,6 +400,9 @@ services:
     container_name: keycloak_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.32
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
@@ -352,6 +416,9 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@dreamsoftware.com
       PGADMIN_DEFAULT_PASSWORD: ssanchez00
       PGADMIN_LISTEN_PORT: 80
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.33
     ports:
       - 8089:80
     volumes:
@@ -369,6 +436,9 @@ services:
       DB_PASSWORD: ssanchez00
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: ssanchez00
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.34
     ports:
       - 8090:8080
     depends_on:
@@ -378,6 +448,9 @@ services:
     image: consul:latest
     container_name: consul-server
     command: agent -server -ui -node=server1 -bootstrap-expect=1 -client=0.0.0.0
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.35
     ports:
       - 8500:8500
       - 8600:8600/udp
@@ -387,6 +460,9 @@ services:
     image: ssanchez11/file_management_service:0.0.1-SNAPSHOT
     container_name: file_management_service
     restart: unless-stopped
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.36
     ports:
       - 8091:8080
 
@@ -395,6 +471,9 @@ services:
     image: ssanchez11/file_metadata_service:0.0.1-SNAPSHOT
     container_name: file_metadata_service
     restart: unless-stopped
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.37
     ports:
       - 8092:8080
 
@@ -403,6 +482,9 @@ services:
     image: ssanchez11/file_search_service:0.0.1-SNAPSHOT
     container_name: file_search_service
     restart: unless-stopped
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.38
     ports:
       - 8093:8080
 
@@ -411,8 +493,11 @@ services:
     image: ssanchez11/files_api_gateway_service:0.0.1-SNAPSHOT
     container_name: files_api_gateway_service
     restart: unless-stopped
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.39
     ports:
-      - 8094:8080
+      - "2223:22"
 
 
 
