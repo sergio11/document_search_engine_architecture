@@ -26,15 +26,18 @@ RUN apt-get install -y openjdk-8-jre
 RUN update-alternatives --config java
 RUN update-alternatives --config javac
 
+RUN apt-get install -y netcat
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY resources/wait-for-it.sh  wait-for-it.sh
+COPY resources/entrypoint.sh entrypoint.sh
 COPY target/files_api_gateway_service.jar app.jar
-
 
 RUN apt-get install -y dos2unix
 RUN dos2unix wait-for-it.sh
 RUN chmod +x wait-for-it.sh
+RUN dos2unix entrypoint.sh
+RUN chmod +x entrypoint.sh
 RUN uname -a
 RUN pwd
 RUN ls -al
@@ -42,4 +45,4 @@ RUN ls -al
 
 EXPOSE 22
 
-ENTRYPOINT ["sh", "-c", "/usr/sbin/sshd && echo 'waiting for 300 seconds for consul-server:8500 to be accessable before starting application' && ./wait-for-it.sh -t 300 consul:8500 -- java -jar app.jar && tail -f /dev/null"]
+CMD ["./entrypoint.sh"]
