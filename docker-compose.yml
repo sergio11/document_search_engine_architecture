@@ -115,8 +115,7 @@ services:
     container_name: hadoop-namenode
     restart: always
     ports:
-      - 9870:9870
-      - 9000:9000
+      - 8089:9870
     volumes:
       - hadoop_namenode:/hadoop/dfs/name
     environment:
