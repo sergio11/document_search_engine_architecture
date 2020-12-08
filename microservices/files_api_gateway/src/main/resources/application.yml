@@ -80,6 +80,20 @@ spring:
               filters:
                 - RemoveRequestHeader=Cookie
                 - RewritePath=/swagger-management-ui.html, /swagger-ui.html
+            - id: files-notifications-service
+              uri: lb://files-notifications-service
+              predicates:
+                - Path=/notifications/**
+              filters:
+                - RemoveRequestHeader=Cookie
+                - RewritePath=/notifications/(?<path>.*), /api/v1/notifications/$\{path}
+            - id: files-notifications-service-swagger
+              uri: lb://files-notifications-service
+              predicates:
+                - Path=/swagger-management-ui.html
+              filters:
+                - RemoveRequestHeader=Cookie
+                - RewritePath=/swagger-management-ui.html, /swagger-ui.html
             - id: openapi
               uri: http://localhost:${server.port}
               predicates:

@@ -27,6 +27,8 @@ volumes:
     driver: local
   pgadmin-data:
     driver: local
+  rabbitmq_data:
+    driver: local
 
 
 networks:
@@ -106,7 +108,7 @@ services:
       platform_network:
         ipv4_address: 192.168.1.17
     ports:
-      - '8099:8080'
+      - '8080:8080'
 
   namenode:
     image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
@@ -179,7 +181,7 @@ services:
       platform_network:
         ipv4_address: 192.168.1.22
     ports:
-      - '8082:8088'
+      - '8081:8088'
 
   nodemanager:
     image: bde2020/hadoop-nodemanager:2.0.0-hadoop3.2.1-java8
@@ -263,8 +265,6 @@ services:
     networks:
       platform_network:
         ipv4_address: 192.168.1.25
-    ports:
-      - "9999:8082"
     depends_on:
       - zookeeper
       - kafka
@@ -277,7 +277,7 @@ services:
     image: landoop/kafka-topics-ui:latest
     container_name: kafka-topics-ui
     ports:
-      - "8081:8000"
+      - "8082:8000"
     networks:
       platform_network:
         ipv4_address: 192.168.1.26
@@ -301,8 +301,6 @@ services:
     networks:
       platform_network:
         ipv4_address: 192.168.1.27
-    ports:
-      - "27017:27017"
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USER}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
@@ -331,7 +329,7 @@ services:
       platform_network:
         ipv4_address: 192.168.1.28
     ports:
-      - "8084:8081"
+      - "8083:8081"
 
   # Elasticsearch is a powerful open source search and analytics engine that makes data easy to explore.
   elasticsearch:
@@ -348,8 +346,6 @@ services:
     networks:
       platform_network:
         ipv4_address: 192.168.1.29
-    ports:
-      - 9200:9200
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
@@ -366,9 +362,6 @@ services:
     networks:
       platform_network:
         ipv4_address: 192.168.1.30
-    ports:
-      - "5000:5000"
-      - "9600:9600"
     volumes:
       - logstash-data:/usr/share/logstash/data
       - ./logstash/pipeline/:/usr/share/logstash/pipeline/
@@ -388,7 +381,7 @@ services:
       platform_network:
         ipv4_address: 192.168.1.31
     ports:
-      - "5601:5601"
+      - "8084:5601"
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
       - ./kibana/certificate/:/etc/kibana/keys/
@@ -420,7 +413,7 @@ services:
       platform_network:
         ipv4_address: 192.168.1.33
     ports:
-      - 8089:80
+      - 8085:80
     volumes:
       - pgadmin-data:/var/lib/pgadmin
 
@@ -440,7 +433,7 @@ services:
       platform_network:
         ipv4_address: 192.168.1.34
     ports:
-      - 8090:8080
+      - 8086:8080
     depends_on:
       - postgres
 
@@ -452,8 +445,7 @@ services:
       platform_network:
         ipv4_address: 192.168.1.35
     ports:
-      - 8500:8500
-      - 8600:8600/udp
+      - 8087:8500
 
   # File Management Service
   file_management_service:
@@ -463,8 +455,6 @@ services:
     networks:
       platform_network:
         ipv4_address: 192.168.1.36
-    ports:
-      - 8091:8080
 
   # File Metadata Service
   file_metadata_service:
@@ -474,8 +464,6 @@ services:
     networks:
       platform_network:
         ipv4_address: 192.168.1.37
-    ports:
-      - 8092:8080
 
   # File Search Service
   file_search_service:
@@ -485,8 +473,15 @@ services:
     networks:
       platform_network:
         ipv4_address: 192.168.1.38
-    ports:
-      - 8093:8080
+
+  # File Notification Service
+  file_search_service:
+    image: ssanchez11/file_notifications_service:0.0.1-SNAPSHOT
+    container_name: file_notifications_service
+    restart: unless-stopped
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.39
 
   # File API Gateway Service
   files_api_gateway_service:
@@ -495,9 +490,21 @@ services:
     restart: unless-stopped
     networks:
       platform_network:
-        ipv4_address: 192.168.1.39
+        ipv4_address: 192.168.1.40
     ports:
       - "2223:22"
+
+  # Rabbit MQ Stomp
+  rabbitmq-stomp:
+    image: activiti/rabbitmq-stomp
+    container_name: rabbitmq-stomp
+    volumes:
+      - 'rabbitmq_data:/var/lib/rabbitmq'
+    networks:
+      platform_network:
+        ipv4_address: 192.168.1.41
+    ports:
+      - '8088:15672'
 
 
 
