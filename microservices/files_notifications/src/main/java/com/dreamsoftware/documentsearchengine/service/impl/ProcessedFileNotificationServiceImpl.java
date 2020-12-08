@@ -65,20 +65,6 @@ public class ProcessedFileNotificationServiceImpl implements IProcessedFileNotif
     }
 
     /**
-     * Find By Name
-     *
-     * @param name
-     * @return
-     */
-    @Override
-    public Optional<ProcessedFileNotificationDTO> findByName(final String name) {
-        Assert.notNull(name, "File name can not be null");
-
-        return processedFileNotificationRepository.findOneByName(name)
-                .map(processedFileNotificationMapper::entityToDTO);
-    }
-
-    /**
      *
      * @param processedFileNotification
      */
