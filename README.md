@@ -11,3 +11,20 @@ An architectural approach to implementing a large-scale document search engine b
 * It should be able to handle a large number of files of various formats and some quite large.
 * It should be optimized to store large amounts of data and maintain multiple copies to ensure high availability and fault tolerance.
 * It should have the ability to integrate with external systems to collaborate on more complex tasks or simply define platform usage schemes.
+
+### Containers Ports
+
+| Container | Port |
+| ------ | ------ |
+| Apache Nifi Dashboard UI | localhost:8080 |
+| Hadoop Resource Manager | localhost:8081 |
+| Kafka Topics UI | localhost:8082 |
+| MongoDB Express | localhost:8083 |
+| Kibana | localhost:8084 |
+| Keycloak PGAdmin | localhost:8085 |
+| Keycloak Admin UI | localhost:8086 |
+| Consul Dashboard | localhost:8087 |
+| Rabbit MQ - Stomp Dashboard | localhost:8088 |
+| Hadoop NameNode Dashboard | localhost:8089 |
+| API Gateway SSH  | localhost:2223 |
+| SFTP Server | localhost:2222 |
