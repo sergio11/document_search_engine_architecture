@@ -14,7 +14,7 @@ An architectural approach to implementing a large-scale document search engine b
 
 ## Architecture Overview
 
-<img width="auto" src="./images/document_search_engine_architecture.jpg" />
+<img width="auto" src="./images/document_search_engine_architecture.png" />
 
 ### Containers Ports
 
