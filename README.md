@@ -12,6 +12,10 @@ An architectural approach to implementing a large-scale document search engine b
 * It should be optimized to store large amounts of data and maintain multiple copies to ensure high availability and fault tolerance.
 * It should have the ability to integrate with external systems to collaborate on more complex tasks or simply define platform usage schemes.
 
+## Architecture Overview
+
+<img width="auto" src="./images/document_search_engine_architecture.jpg" />
+
 ### Containers Ports
 
 | Container | Port |
