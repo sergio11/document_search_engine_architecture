@@ -32,3 +32,47 @@ An architectural approach to implementing a large-scale document search engine b
 | Hadoop NameNode Dashboard | localhost:8089 |
 | API Gateway SSH  | localhost:2223 |
 | SFTP Server | localhost:2222 |
+
+## Some screenshots
+
+### Apache Nifi
+
+<img width="auto" src="./images/apache_nifi_1.PNG" />
+<img width="auto" src="./images/apache_nifi_2.PNG" />
+<img width="auto" src="./images/apache_nifi_3.PNG" />
+<img width="auto" src="./images/apache_nifi_4.PNG" />
+<img width="auto" src="./images/apache_nifi_5.PNG" />
+<img width="auto" src="./images/apache_nifi_6.PNG" />
+
+### Apache Kafka
+
+<img width="auto" src="./images/apache_kafka_1.PNG" />
+<img width="auto" src="./images/apache_kafka_2.PNG" />
+
+### Apache Hadoop HDFS
+
+<img width="auto" src="./images/hdfs_1.PNG" />
+<img width="auto" src="./images/hdfs_2.PNG" />
+<img width="auto" src="./images/hdfs_3.PNG" />
+
+### MongoDB
+
+<img width="auto" src="./images/mongodb_1.PNG" />
+<img width="auto" src="./images/mongodb_2.PNG" />
+<img width="auto" src="./images/mongodb_3.PNG" />
+<img width="auto" src="./images/mongodb_4.PNG" />
+<img width="auto" src="./images/mongodb_5.PNG" />
+
+### ELK Stack
+
+<img width="auto" src="./images/kibana_1.PNG" />
+<img width="auto" src="./images/kibana_2.PNG" />
+<img width="auto" src="./images/kibana_3.PNG" />
+<img width="auto" src="./images/kibana_4.PNG" />
+<img width="auto" src="./images/kibana_5.PNG" />
+<img width="auto" src="./images/kibana_6.PNG" />
+<img width="auto" src="./images/kibana_7.PNG" />
+
+
+
+
