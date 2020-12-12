@@ -10,7 +10,10 @@ public enum FilesManagementResponseCodeEnum implements IResponseCodeTypes {
 
     FILE_SAVED_SUCCESSFULLY(300L),
     SAVE_FILE_ERROR(301L),
-    VALIDATION_ERROR(302L);
+    VALIDATION_ERROR(302L),
+    FILE_ALREADY_PROCESSED(303L),
+    DELETE_FILE_ERROR(304L),
+    FILE_DELETED_SUCCESSFULLY(305L);
 
     private final Long code;
 
