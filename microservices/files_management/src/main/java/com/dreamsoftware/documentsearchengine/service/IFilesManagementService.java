@@ -15,4 +15,11 @@ public interface IFilesManagementService {
      */
     void save(final MultipartFile uploadFile);
 
+    /**
+     * Delete
+     *
+     * @param name
+     */
+    void delete(final String name);
+
 }
