@@ -40,7 +40,6 @@ desc "Cleaning Evironment Task"
 task :cleaning_environment_task do 
 	puts "Cleaning Environment"
 	puts `docker image prune -af`
-	puts `docker network prune -f 2>&1`
 	puts `docker volume prune -f 2>&1`
 end
 
