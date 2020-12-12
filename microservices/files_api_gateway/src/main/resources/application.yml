@@ -14,13 +14,13 @@ spring:
           files-management-client:
             provider: keycloak
             client-id: files-management-client
-            client-secret: 28dfcecd-c11e-4176-828c-5108edd42782
+            client-secret: 23c6be5d-0aed-421b-a245-9f13ee5412c9
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
           files-viewing-client:
             provider: keycloak
             client-id: files-viewing-client
-            client-secret: 7903aa89-d733-43c1-8037-95bd35579737
+            client-secret: 8d238a8c-6f0c-4935-b394-da4b4901aec1
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
   cloud:

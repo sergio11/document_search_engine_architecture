@@ -388,7 +388,8 @@ services:
       - elasticsearch
 
   postgres:
-    image: postgres
+    build: 
+      context: ./keycloak
     container_name: keycloak_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
