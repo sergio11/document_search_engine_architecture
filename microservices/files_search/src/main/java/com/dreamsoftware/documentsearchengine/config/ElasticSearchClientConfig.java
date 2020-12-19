@@ -69,8 +69,6 @@ public class ElasticSearchClientConfig extends AbstractElasticsearchConfiguratio
             ks.load(getClass().getClassLoader().getResourceAsStream(certFile),
                     certPassword.toCharArray());
 
-            logger.debug("KeyStore has " + ks.size() + " entries");
-
             KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
             keyManagerFactory.init(ks, certPassword.toCharArray());
 
