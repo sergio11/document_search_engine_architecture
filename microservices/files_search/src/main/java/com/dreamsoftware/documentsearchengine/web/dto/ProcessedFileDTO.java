@@ -48,6 +48,12 @@ public class ProcessedFileDTO {
     private String permissions;
 
     /**
+     * File URL
+     */
+    @JsonProperty("url")
+    private String url;
+
+    /**
      * File Mime Type
      */
     @JsonProperty("mime_type")
