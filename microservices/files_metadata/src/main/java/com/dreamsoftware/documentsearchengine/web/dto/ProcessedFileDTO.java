@@ -35,6 +35,12 @@ public class ProcessedFileDTO {
     private String name;
 
     /**
+     * File URL
+     */
+    @JsonProperty("url")
+    private String url;
+
+    /**
      * File Permissions
      */
     @JsonProperty("permissions")

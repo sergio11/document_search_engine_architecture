@@ -475,7 +475,7 @@ services:
         ipv4_address: 192.168.1.38
 
   # File Notification Service
-  file_search_service:
+  file_notification_service:
     image: ssanchez11/file_notifications_service:0.0.1-SNAPSHOT
     container_name: file_notifications_service
     restart: unless-stopped

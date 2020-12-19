@@ -68,6 +68,12 @@ public class FilesManagementController extends SupportController {
         }
     }
 
+    /**
+     * Delete By Name
+     *
+     * @param name
+     * @return
+     */
     @PreAuthorize("hasAuthority('SCOPE_FILES_MANAGEMENT')")
     @Operation(summary = "DELETE_FILE", description = "Delete File")
     @RequestMapping(value = "/{name}", method = RequestMethod.DELETE)
