@@ -31,4 +31,9 @@ public enum FilesMetadataResponseCodeEnum implements IResponseCodeTypes {
     public String getCategoryName() {
         return CATEGORY_NAME;
     }
+
+    @Override
+    public String getCodeName() {
+        return name();
+    }
 }

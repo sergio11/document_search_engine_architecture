@@ -20,4 +20,11 @@ public interface IResponseCodeTypes {
      */
     String getCategoryName();
 
+    /**
+     * Get Code Name
+     *
+     * @return
+     */
+    String getCodeName();
+
 }
