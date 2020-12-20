@@ -1,6 +1,7 @@
 package com.dreamsoftware.documentsearchengine.service.impl;
 
 import com.dreamsoftware.documentsearchengine.client.IFilesMetadataClient;
+import com.dreamsoftware.documentsearchengine.config.AppStreamsConfig;
 import com.dreamsoftware.documentsearchengine.config.props.SFTPProperties;
 import com.dreamsoftware.documentsearchengine.config.props.UploadProperties;
 import com.dreamsoftware.documentsearchengine.service.IFilesManagementService;
@@ -21,8 +22,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dreamsoftware.documentsearchengine.web.core.APIResponse;
 import com.dreamsoftware.documentsearchengine.web.core.ResponseStatusEnum;
 import com.dreamsoftware.documentsearchengine.web.dto.ProcessedFileDTO;
+import feign.FeignException.NotFound;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import com.dreamsoftware.documentsearchengine.web.dto.RequestOperationToProcessedFileDTO;
+import com.dreamsoftware.documentsearchengine.web.dto.RequestOperationTypeEnum;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.support.MessageBuilder;
 
 /**
  *
@@ -38,6 +45,8 @@ public class FilesManagementServiceImpl implements IFilesManagementService {
     private final UploadProperties uploadProperties;
     private final SFTPProperties sftpProperties;
     private final IFilesMetadataClient filesMetadataClient;
+    @Qualifier(AppStreamsConfig.FILES_PROCESSED_OPERATIONS_CHANNEL)
+    private final MessageChannel messageChannel;
 
     /**
      * Save File
@@ -48,35 +57,19 @@ public class FilesManagementServiceImpl implements IFilesManagementService {
     public void save(final MultipartFile uploadFile) {
         Assert.notNull(uploadFile, "Upload File can not be null");
 
-        final APIResponse<ProcessedFileDTO> response = filesMetadataClient.getProcessedFileByName(uploadFile.getOriginalFilename());
-        if (response.getStatus() == ResponseStatusEnum.ERROR
-                && response.getHttpStatusCode() == HttpStatus.NOT_FOUND) {
+        try {
 
-            try (SSHClient sshClient = setupSshj();
-                    SFTPClient sftpClient = sshClient.newSFTPClient()) {
+            final APIResponse<ProcessedFileDTO> response = filesMetadataClient.getProcessedFileByName(uploadFile.getOriginalFilename());
 
-                // Ensure Folder For Uploads
-                ensureFolderForUploads();
-                // Get new file to save bytes
-                File fileToSave = getFileToSave(uploadFile.getOriginalFilename());
-
-                logger.debug("File To Save Path -> " + fileToSave.getAbsolutePath());
-                logger.debug("File To Save -> " + fileToSave.getName());
-
-                // Write File
-                Files.write(fileToSave.toPath(), uploadFile.getBytes(), StandardOpenOption.CREATE);
-
-                // Put File into FTP directory
-                sftpClient.put(fileToSave.getAbsolutePath(), sftpProperties.getRemoteFolder() + fileToSave.getName());
-
-                // Delete local file
-                fileToSave.delete();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+            if (response.getStatus() == ResponseStatusEnum.ERROR
+                    && response.getHttpStatusCode() == HttpStatus.NOT_FOUND) {
+                sendFileToSftp(uploadFile);
+            } else {
+                throw new FileAlreadyProcessedException();
             }
 
-        } else {
-            throw new FileAlreadyProcessedException();
+        } catch (final NotFound feignException) {
+            sendFileToSftp(uploadFile);
         }
     }
 
@@ -95,6 +88,13 @@ public class FilesManagementServiceImpl implements IFilesManagementService {
 
             final ProcessedFileDTO processedFile = response.getData();
 
+            final RequestOperationToProcessedFileDTO requestOperation = RequestOperationToProcessedFileDTO.builder()
+                    .id(processedFile.getId())
+                    .filename(processedFile.getName())
+                    .operation(RequestOperationTypeEnum.DELETE)
+                    .build();
+
+            messageChannel.send(MessageBuilder.withPayload(requestOperation).build());
             log.debug("============== Processed File to delete ============== ");
             log.debug(" Author: " + processedFile.getAuthor());
             log.debug(" Language: " + processedFile.getLanguage());
@@ -145,6 +145,38 @@ public class FilesManagementServiceImpl implements IFilesManagementService {
         }
 
         logger.debug("Uploads Directory -> " + uploadsDirectory.getAbsolutePath());
+    }
+
+    /**
+     * Send File to SFTP
+     *
+     * @param uploadFile
+     */
+    private void sendFileToSftp(final MultipartFile uploadFile) {
+        Assert.notNull(uploadFile, "Upload File can not be null");
+
+        try (SSHClient sshClient = setupSshj();
+                SFTPClient sftpClient = sshClient.newSFTPClient()) {
+
+            // Ensure Folder For Uploads
+            ensureFolderForUploads();
+            // Get new file to save bytes
+            File fileToSave = getFileToSave(uploadFile.getOriginalFilename());
+
+            logger.debug("File To Save Path -> " + fileToSave.getAbsolutePath());
+            logger.debug("File To Save -> " + fileToSave.getName());
+
+            // Write File
+            Files.write(fileToSave.toPath(), uploadFile.getBytes(), StandardOpenOption.CREATE);
+
+            // Put File into FTP directory
+            sftpClient.put(fileToSave.getAbsolutePath(), sftpProperties.getRemoteFolder() + fileToSave.getName());
+
+            // Delete local file
+            fileToSave.delete();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
