@@ -14,6 +14,11 @@ spring:
             port: 8080
             prefer-ip-address: true
             healthCheckPath: /actuator/health
+
+management:
+  health:
+    elasticsearch:
+      enabled: false
 ## Spring Open API
 springdoc:
     swagger-ui:
