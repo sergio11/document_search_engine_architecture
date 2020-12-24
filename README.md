@@ -53,6 +53,8 @@ An architectural approach to implementing a large-scale document search engine b
 
 ### Apache Nifi
 
+Apache NiFi supports powerful and scalable directed graphs of data routing, transformation, and system mediation logic.
+
 <img width="auto" src="./images/apache_nifi_1.PNG" />
 <img width="auto" src="./images/apache_nifi_2.PNG" />
 <img width="auto" src="./images/apache_nifi_3.PNG" />
@@ -63,10 +65,14 @@ An architectural approach to implementing a large-scale document search engine b
 
 ### Apache Kafka
 
+Apache Kafka is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications.
+
 <img width="auto" src="./images/apache_kafka_1.PNG" />
 <img width="auto" src="./images/apache_kafka_2.PNG" />
 
 ### Apache Hadoop HDFS
+
+The Hadoop Distributed File System (HDFS) is a distributed file system designed to run on commodity hardware. It has many similarities with existing distributed file systems. However, the differences from other distributed file systems are significant. HDFS is highly fault-tolerant and is designed to be deployed on low-cost hardware. HDFS provides high throughput access to application data and is suitable for applications that have large data sets. HDFS relaxes a few POSIX requirements to enable streaming access to file system data. HDFS was originally built as infrastructure for the Apache Nutch web search engine project. HDFS is now an Apache Hadoop subproject.
 
 <img width="auto" src="./images/hdfs_1.PNG" />
 <img width="auto" src="./images/hdfs_2.PNG" />
