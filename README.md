@@ -31,7 +31,46 @@ An architectural approach to implementing a large-scale document search engine b
 * All services exposed of each services require authentication and authorization, therefore, it is necessary get a identity from the SSO Keycloak Server through the API Gateway Service.
 * The API Gateway microservice unifies all APIs into a single API (using Spring Cloud Gateway for that), therefore, only will be necessary knows the location of gateway to interact with the platform.
 
+## Used technology
 
+* Spring Boot 2.3.5 / Apache Maven 3.6.3.
+* Spring Boot Starter Actuator.
+* Spring Cloud Stream.
+* Spring Cloud Gateway.
+* Spring Cloud Starter Consul Discovery.
+* ElasticSearch - Logstash - Kibana (ELK Stack).
+* MongoDB.
+* Mongo DB Express (Web-based MongoDB admin interface, written with Node.js and express).
+* Consul Server.
+* SSO Keycloak Server.
+* Hadoop HDFS.
+* Apache Nifi.
+* Apache Tika Server.
+* Rabbit MQ / STOMP protocol.
+* Apache Kafka.
+* Kafka Rest Proxy
+
+## Running Applications as Docker containers.
+
+### Rake Tasks
+
+The available tasks are detailed below (rake --task)
+
+
+| Task | Description |
+| ------ | ------ |
+| check_deployment_file_task | Check Deployment File |
+| check_docker_task | Check Docker and Docker Compose Task |
+| cleaning_environment_task | Cleaning Evironment Task |
+| deploy | Deploys the Document Search Engine architecture and laun... |
+| login | Authenticating with existing credentials |
+| start | Start Containers |
+| status | Status Containers |
+| stop | Stop Containers |
+| undeploy | UnDeploy Document Search Engine architecture |
+
+
+To start the platform make sure you have Ruby installed, go to the root directory of the project and run the `rake deploy` task, this task will carry out a series of preliminary checks, discard images and volumes that are no longer necessary and also proceed to download all the images and the initialization of the containers.
 
 
 ### Containers Ports
