@@ -36,6 +36,8 @@ An architectural approach to implementing a large-scale document search engine b
 
 ### Containers Ports
 
+In this table you can view the ports assigned to each service to access to the Web tools or something else you can use to monitoring the flow.
+
 | Container | Port |
 | ------ | ------ |
 | Apache Nifi Dashboard UI | localhost:8080 |
@@ -53,7 +55,9 @@ An architectural approach to implementing a large-scale document search engine b
 
 ## Some screenshots
 
-### Apache Nifi
+As follow, I include some images that help us to understand the performance of each part of system
+
+### ETL Flow based on Apache Nifi
 
 Apache NiFi supports powerful and scalable directed graphs of data routing, transformation, and system mediation logic.
 
@@ -65,14 +69,14 @@ Apache NiFi supports powerful and scalable directed graphs of data routing, tran
 <img width="auto" src="./images/apache_nifi_6.PNG" />
 <img width="auto" src="./images/apache_nifi_7.PNG" />
 
-### Apache Kafka
+### Events System based on Apache Kafka
 
 Apache Kafka is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications.
 
 <img width="auto" src="./images/apache_kafka_1.PNG" />
 <img width="auto" src="./images/apache_kafka_2.PNG" />
 
-### Apache Hadoop HDFS
+### Apache Hadoop HDFS to store the files that will proccess
 
 The Hadoop Distributed File System (HDFS) is a distributed file system designed to run on commodity hardware. It has many similarities with existing distributed file systems. However, the differences from other distributed file systems are significant. HDFS is highly fault-tolerant and is designed to be deployed on low-cost hardware. HDFS provides high throughput access to application data and is suitable for applications that have large data sets. HDFS relaxes a few POSIX requirements to enable streaming access to file system data. HDFS was originally built as infrastructure for the Apache Nutch web search engine project. HDFS is now an Apache Hadoop subproject.
 
@@ -80,7 +84,7 @@ The Hadoop Distributed File System (HDFS) is a distributed file system designed 
 <img width="auto" src="./images/hdfs_2.PNG" />
 <img width="auto" src="./images/hdfs_3.PNG" />
 
-### MongoDB
+### MongoDB to store the metadata and content of the files that have been proccessed.
 
 <img width="auto" src="./images/mongodb_1.PNG" />
 <img width="auto" src="./images/mongodb_2.PNG" />
@@ -88,13 +92,13 @@ The Hadoop Distributed File System (HDFS) is a distributed file system designed 
 <img width="auto" src="./images/mongodb_4.PNG" />
 <img width="auto" src="./images/mongodb_5.PNG" />
 
-### Consul 
+### Consul to coordinate microservices architecture. 
 
 <img width="auto" src="./images/consul_1.PNG" />
 <img width="auto" src="./images/consul_2.PNG" />
 <img width="auto" src="./images/consul_3.PNG" />
 
-### Keycloak
+### SSO Keycloak Server
 
 <img width="auto" src="./images/keycloak_1.PNG" />
 <img width="auto" src="./images/keycloak_2.PNG" />
@@ -102,7 +106,7 @@ The Hadoop Distributed File System (HDFS) is a distributed file system designed 
 <img width="auto" src="./images/keycloak_4.PNG" />
 <img width="auto" src="./images/keycloak_5.PNG" />
 
-### Gateway
+### The entry point to the architecture.
 
 <img width="auto" src="./images/gateway_1.PNG" />
 <img width="auto" src="./images/gateway_2.PNG" />
