@@ -8,7 +8,7 @@ An architectural approach to implementing a large-scale document search engine b
 
 ## Main Goals
 
-* It should have a fast and efficient search, providing the same search experience as Google Search.
+* It should have a fast and efficient search, providing the same search experience as others engine search.
 * All text in documents (including their content) must be extracted and indexed.
 * The architecture should be scalable, it must use technological references in the movement of data.
 * It should be able to handle a large number of files of various formats and some quite large.
@@ -18,6 +18,17 @@ An architectural approach to implementing a large-scale document search engine b
 ## Architecture Overview
 
 <img width="auto" src="./images/document_search_engine_architecture.png" />
+
+### Several things to be consider
+
+* I am using a HDFS Cluster with 3 datanodes to store the original files that they will be process.
+* I am using two versions of Apache Tika server, one of them has a OCR capabilities to extract content from images or proccess scanned pdfs.
+* I am using an SFTP server as the entry point for the Nifi ETL process, a microservice will upload the file into a share directory, then a processor from nifi will try to poll continuously wheather a new file has been added.
+* A easy and quick way to explain how the Nifi ETL process works, is that it moves the file to the HDFS directory and then try to get their MIME type and considering this make a HTTP request to the more adequeate Apache Tika server to get all metadata and text content from this. To end, will try to store all this information into a MongoDB collection and publish serveral records in Kafka of inform the process state.
+* It is necessary to moves this information to elasticsearch for make a complex searches, due to, MongoDB don't have a powerful capabilities in this aspect. For that, I am using a Logstash pipeline that allows to sync MongoDB's documents to a elasticsearch index.
+
+
+
 
 ### Containers Ports
 
