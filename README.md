@@ -43,6 +43,7 @@ An architectural approach to implementing a large-scale document search engine b
 <img width="auto" src="./images/apache_nifi_4.PNG" />
 <img width="auto" src="./images/apache_nifi_5.PNG" />
 <img width="auto" src="./images/apache_nifi_6.PNG" />
+<img width="auto" src="./images/apache_nifi_7.PNG" />
 
 ### Apache Kafka
 
@@ -63,6 +64,31 @@ An architectural approach to implementing a large-scale document search engine b
 <img width="auto" src="./images/mongodb_4.PNG" />
 <img width="auto" src="./images/mongodb_5.PNG" />
 
+### Consul 
+
+<img width="auto" src="./images/consul_1.PNG" />
+<img width="auto" src="./images/consul_2.PNG" />
+<img width="auto" src="./images/consul_3.PNG" />
+
+### Keycloak
+
+<img width="auto" src="./images/keycloak_1.PNG" />
+<img width="auto" src="./images/keycloak_2.PNG" />
+<img width="auto" src="./images/keycloak_3.PNG" />
+<img width="auto" src="./images/keycloak_4.PNG" />
+<img width="auto" src="./images/keycloak_5.PNG" />
+
+### Gateway
+
+<img width="auto" src="./images/gateway_1.PNG" />
+<img width="auto" src="./images/gateway_2.PNG" />
+<img width="auto" src="./images/gateway_3.PNG" />
+<img width="auto" src="./images/gateway_4.PNG" />
+<img width="auto" src="./images/gateway_5.PNG" />
+<img width="auto" src="./images/gateway_6.PNG" />
+<img width="auto" src="./images/gateway_7.PNG" />
+<img width="auto" src="./images/gateway_8.PNG" />
+
 ### ELK Stack
 
 <img width="auto" src="./images/kibana_1.PNG" />
@@ -72,7 +98,3 @@ An architectural approach to implementing a large-scale document search engine b
 <img width="auto" src="./images/kibana_5.PNG" />
 <img width="auto" src="./images/kibana_6.PNG" />
 <img width="auto" src="./images/kibana_7.PNG" />
-
-
-
-
