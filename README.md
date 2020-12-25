@@ -92,6 +92,10 @@ In this table you can view the ports assigned to each service to access to the W
 | API Gateway SSH  | localhost:2223 |
 | SFTP Server | localhost:2222 |
 
+## Some Videos
+
+[![An architectural approach to implement a large-scale document search engine based on Apache Nifi.](https://img.youtube.com/vi/-wJElnR3St4/maxresdefault.jpg)](https://youtu.be/-wJElnR3St4)
+
 ## Some screenshots
 
 As follow, I include some images that help us to understand the performance of each part of system
