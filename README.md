@@ -94,7 +94,7 @@ In this table you can view the ports assigned to each service to access to the W
 
 ## Some Videos
 
-[![An architectural approach to implement a large-scale document search engine based on Apache Nifi.](https://img.youtube.com/vi/-wJElnR3St4/maxresdefault.jpg)](https://youtu.be/-wJElnR3St4)
+[![An architectural approach to implement a large-scale document search engine based on Apache Nifi](https://img.youtube.com/vi/-wJElnR3St4/maxresdefault.jpg)](https://youtu.be/-wJElnR3St4)
 
 ## Some screenshots
 
