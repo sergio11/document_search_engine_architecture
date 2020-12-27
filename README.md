@@ -38,6 +38,10 @@ An architectural approach to implementing a large-scale document search engine b
 * Spring Cloud Stream.
 * Spring Cloud Gateway.
 * Spring Cloud Starter Consul Discovery.
+* Spring Cloud Starter OpenFeign.
+* Springdoc OpenApi.
+* Spring Boot Starter Security.
+* Spring Security OAuth2.
 * ElasticSearch - Logstash - Kibana (ELK Stack).
 * MongoDB.
 * Mongo DB Express (Web-based MongoDB admin interface, written with Node.js and express).
