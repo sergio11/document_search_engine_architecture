@@ -1,6 +1,8 @@
 # A document search engine architectural approach
 An architectural approach to implementing a large-scale document search engine based on Apache Nifi.
 
+Also you can read more detail information about this project [in this Medium article](https://sanchezsanchezsergio418.medium.com/an-architectural-approach-to-implement-a-large-scale-document-search-engine-based-on-apache-nifi-430cbe91065f?source=your_stories_page-------------------------------------).
+
 ## Main Components
 
 * ETL process design based on Apache Nifi's flow-based programming model to proccess and extract all metadata and content from each files.
