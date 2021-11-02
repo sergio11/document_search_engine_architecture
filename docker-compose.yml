@@ -505,7 +505,7 @@ services:
 
   # Rabbit MQ Stomp
   rabbitmq-stomp:
-    image: pull jorgeacetozi/rabbitmq-stomp
+    image: jorgeacetozi/rabbitmq-stomp
     container_name: rabbitmq-stomp
     volumes:
       - 'rabbitmq_data:/var/lib/rabbitmq'
