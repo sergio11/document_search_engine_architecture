@@ -1,0 +1,9 @@
+version: "3.0"
+
+services:
+  file-preprocess:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 8091:8080
