@@ -447,6 +447,8 @@ services:
     ports:
       - 8087:8500
 
+
+###############################
   # File Management Service
   # file_management_service:
   #   image: ssanchez11/file_management_service:0.0.1-SNAPSHOT
@@ -493,6 +495,10 @@ services:
   #       ipv4_address: 192.168.1.40
   #   ports:
   #     - "2223:22"
+
+
+#####################################
+
 
   file_preprocessing_service:
     build:
