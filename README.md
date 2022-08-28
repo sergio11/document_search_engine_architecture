@@ -104,7 +104,7 @@ In this table you can view the ports assigned to each service to access to the W
 
 [![An architectural approach to implement a large-scale document search engine based on Apache Nifi](https://img.youtube.com/vi/9aQTO5J7_K4/maxresdefault.jpg)](https://youtu.be/9aQTO5J7_K4)
 
-[![Microservice architecture to interact with the platform](https://img.youtube.com/vi/FZzMTr_z0Lw/maxresdefault.jpg)](https://youtu.be/FZzMTr_z0Lw)
+[![Microservice architecture to interact with the platform](https://img.youtube.com/vi/FZzMTr_z0Lw/hqdefault.jpg)](https://youtu.be/FZzMTr_z0Lw)
 
 
 
