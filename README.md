@@ -181,3 +181,8 @@ The Hadoop Distributed File System (HDFS) is a distributed file system designed 
 <img width="auto" src="./images/kibana_5.PNG" />
 <img width="auto" src="./images/kibana_6.PNG" />
 <img width="auto" src="./images/kibana_7.PNG" />
+
+## Visitors Count
+
+<img width="auto" src="https://profile-counter.glitch.me/document_search_engine_architecture/count.svg" />
+
