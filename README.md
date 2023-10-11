@@ -1,37 +1,40 @@
-# A document search engine architectural approach
-An architectural approach to implementing a large-scale document search engine based on Apache Nifi.
+# 📚🔍 Document Search Engine with Apache NiFi Architecture 🚀
 
-Also you can read more detail information about this project [in this Medium article](https://sanchezsanchezsergio418.medium.com/an-architectural-approach-to-implement-a-large-scale-document-search-engine-based-on-apache-nifi-430cbe91065f?source=your_stories_page-------------------------------------).
+This project offers an architectural approach to implement a large-scale document search engine using Apache NiFi as its foundation. 📚🔍
 
-## Main Components
+## More Details 📝
 
-* ETL process design based on Apache Nifi's flow-based programming model to proccess and extract all metadata and content from each files.
-* Microservice architecture to interact with the platform. Concretely we can get metadata from a specific file, launch a new file processing, make a complex queries to search files that have a specific term into their content.
+For comprehensive information about this project, check out this [Medium article](https://sanchezsanchezsergio418.medium.com/an-architectural-approach-to-implement-a-large-scale-document-search-engine-based-on-apache-nifi-430cbe91065f).
 
-## Main Goals
+## Main Components 🔧
 
-* It should have a fast and efficient search, providing the same search experience as others engine search.
-* All text in documents (including their content) must be extracted and indexed.
-* The architecture should be scalable, it must use technological references in the movement of data.
-* It should be able to handle a large number of files of various formats and some quite large.
-* It should be optimized to store large amounts of data and maintain multiple copies to ensure high availability and fault tolerance.
-* It should have the ability to integrate with external systems to collaborate on more complex tasks or simply define platform usage schemes.
+- **ETL Process**: Our ETL (Extract, Transform, Load) process is designed based on Apache NiFi's flow-based programming model, making it efficient at extracting metadata and content from various file formats.
+- **Microservice Architecture**: We've implemented a robust microservice architecture to interact with the platform, enabling tasks such as retrieving specific file metadata, initiating file processing, and executing complex searches with ease.
 
-## Architecture Overview
+## Main Goals 🎯
+
+- **Fast & Efficient Search**: Our search engine is optimized for speed and efficiency, providing a user experience comparable to other leading search engines.
+- **Comprehensive Indexing**: We extract and index all text within documents, including their content.
+- **Scalability**: The architecture is designed to scale effortlessly, leveraging modern data movement technologies.
+- **Diverse File Handling**: It's capable of handling a large number of files in various formats, including substantial ones.
+- **High Availability**: We've optimized the system to store vast amounts of data, maintaining multiple copies to ensure high availability and fault tolerance.
+- **Integration Capabilities**: The project is flexible, allowing seamless integration with external systems for complex tasks and platform usage scenarios.
+
+## Architecture Overview 🏛️
 
 <img width="auto" src="./images/document_search_engine_architecture.png" />
 
-### Several things to be consider
+Several critical components underpin our project, including:
 
-* I am using a HDFS Cluster with 3 datanodes to store the original files that they will be process.
-* I am using two versions of Apache Tika server, one of them has a OCR capabilities to extract content from images or proccess scanned pdfs.
-* I am using an SFTP server as the entry point for the Nifi ETL process, a microservice will upload the file into a share directory, then a processor from nifi will try to poll continuously wheather a new file has been added.
-* A easy and quick way to explain how the Nifi ETL process works, is that it moves the file to the HDFS directory and then try to get their MIME type and considering this make a HTTP request to the more adequeate Apache Tika server to get all metadata and text content from this. To end, will try to store all this information into a MongoDB collection and publish serveral records in Kafka of inform the process state.
-* It is necessary to moves this information to elasticsearch for make a complex searches, due to, MongoDB don't have a powerful capabilities in this aspect. For that, I am using a Logstash pipeline that allows to sync MongoDB's documents to a elasticsearch index.
-* I am using two poweful tools to explore the data that has been indexed and stored, one of them is MongoDB Express to explore the MongoDB collection and the other is Kibana to check hearbeat of the ELK Stack and show the data has been indexed until now.
-* The microservice architecture is coordinate for a consul agent, is continuously check the availability of each service and it allows to query the network location of each service registered.
-* All services exposed of each services require authentication and authorization, therefore, it is necessary get a identity from the SSO Keycloak Server through the API Gateway Service.
-* The API Gateway microservice unifies all APIs into a single API (using Spring Cloud Gateway for that), therefore, only will be necessary knows the location of gateway to interact with the platform.
+- 📂 **HDFS Cluster**: We use a 3-datanode HDFS cluster to store original files for processing.
+- 🌟 **Apache Tika**: We utilize two versions of Apache Tika servers, one of which has OCR capabilities for content extraction from images and scanned PDFs.
+- 📤 **SFTP Server**: This serves as the entry point for the NiFi ETL process. A microservice uploads files to a shared directory, while a NiFi processor continuously polls for new additions.
+- 🔄 **ETL Process**: The NiFi ETL process moves files to the HDFS directory, determines their MIME type, and makes HTTP requests to the appropriate Apache Tika server for metadata and text content extraction. The data is then stored in a MongoDB collection, with process state updates published to Kafka.
+- 🐘 **Elasticsearch Integration**: Complex searches are made possible by syncing data to Elasticsearch via a Logstash pipeline, as MongoDB lacks advanced search capabilities.
+- 📊 **Data Exploration Tools**: MongoDB Express and Kibana are employed to explore and visualize indexed data.
+- 🌐 **Microservice Coordination**: A Consul agent continuously monitors service availability and network locations.
+- 🔐 **Authentication & Authorization**: All exposed services require authentication and authorization, facilitated by obtaining identity from the SSO Keycloak Server through the API Gateway Service.
+- 🌉 **API Gateway**: The API Gateway microservice unifies all APIs into a single point of entry using Spring Cloud Gateway.
 
 ## Used technology
 
