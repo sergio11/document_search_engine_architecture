@@ -1,6 +1,24 @@
 # 📚🔍 SearchForge: Crafting Powerful Document Searches with NiFi 🚀
 
-This project offers an architectural approach to implement a large-scale document search engine using Apache NiFi as its foundation. 📚🔍
+<img width="300px" align="left" src="./logo.PNG" /> 
+
+🚀 This groundbreaking project pioneers an avant-garde architectural strategy, revolutionizing the implementation of a dynamic and powerful document search engine. At its core is the formidable Apache NiFi, strategically positioned as the linchpin of this transformative system. 📚🔍
+
+🌍 In response to the escalating demand for efficient document retrieval and analysis, the innovative approach leverages the inherent capabilities of Apache NiFi. This adaptable framework facilitates a seamless Extract, Transform, Load (ETL) process, ensuring the efficient extraction of metadata and content from a diverse array of file formats. The result is a sophisticated document search engine that not only meets but exceeds the expectations of modern information retrieval systems. 🌐✨
+
+💡 Moreover, the architecture extends beyond mere functionality, embracing a holistic vision of scalability, flexibility, and performance. By intricately interweaving technologies such as Apache Kafka, Docker, JWT, MongoDB, Spring, Spring Boot, Swagger, and Elasticsearch, this project sets the stage for a comprehensive and streamlined document management ecosystem. The union of these cutting-edge technologies propels the search engine into a league of its own, promising not just search capabilities, but an immersive and intelligent exploration of information within documents. 🚀🔗💬
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Apache_Kafka-231F20?style=for-the-badge&logo=apache-kafka&logoColor=white" />
+  <img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white" />
+  <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white" />
+  <img src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white" />
+  <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white" />
+  <img src="https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot" />
+  <img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white" />
+  <img src="https://img.shields.io/badge/Elastic_Search-005571?style=for-the-badge&logo=elasticsearch&logoColor=white" />
+</p>
+
 
 ## More Details 📝
 
