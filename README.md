@@ -1,4 +1,4 @@
-# 📚🔍 Document Search Engine with Apache NiFi Architecture 🚀
+# 📚🔍 SearchForge: Crafting Powerful Document Searches with NiFi 🚀
 
 This project offers an architectural approach to implement a large-scale document search engine using Apache NiFi as its foundation. 📚🔍
 
