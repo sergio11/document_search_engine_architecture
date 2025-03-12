@@ -1,6 +1,6 @@
 # 📚🔍 SearchForge: Crafting Powerful Document Searches with NiFi 🚀
 
-<img width="300px" align="left" src="./logo.PNG" /> 
+<img width="300px" align="left" src="document_search_engine_logo.webp" /> 
 
 🚀 This groundbreaking project pioneers an avant-garde architectural strategy, revolutionizing the implementation of a dynamic and powerful document search engine. At its core is the formidable Apache NiFi, strategically positioned as the linchpin of this transformative system. 📚🔍
 
@@ -21,6 +21,12 @@
   <img src="https://img.shields.io/badge/rabbitmq-%23FF6600.svg?&style=for-the-badge&logo=rabbitmq&logoColor=white" />
   <img src="https://img.shields.io/badge/Apache Nifi-D22128?style=for-the-badge&logo=Apache&logoColor=white" />
 </p>
+
+## ⚠️ Disclaimer:
+
+This project, **SearchForge**, has been developed **for educational purposes only**. The primary goal of this project is to provide an advanced, hands-on learning experience on how to build a dynamic document search engine using modern technologies like **Apache NiFi**, **Kafka**, **Elasticsearch**, **MongoDB**, and more.
+
+This repository does not contain any actual document content. All documents and metadata referenced or used in this project are for demonstration and learning purposes only. The project aims to showcase how a powerful search engine can be architected using the **Extract, Transform, Load (ETL)** process for efficient document retrieval, analysis, and indexing.
 
 
 ## More Details 📝
@@ -205,6 +211,12 @@ The Hadoop Distributed File System (HDFS) is a distributed file system designed 
 <img width="auto" src="./images/kibana_5.PNG" />
 <img width="auto" src="./images/kibana_6.PNG" />
 <img width="auto" src="./images/kibana_7.PNG" />
+
+## ⚠️ Disclaimer:
+
+This project, **SearchForge**, has been developed **for educational purposes only**. The primary goal of this project is to provide an advanced, hands-on learning experience on how to build a dynamic document search engine using modern technologies like **Apache NiFi**, **Kafka**, **Elasticsearch**, **MongoDB**, and more.
+
+This repository does not contain any actual document content. All documents and metadata referenced or used in this project are for demonstration and learning purposes only. The project aims to showcase how a powerful search engine can be architected using the **Extract, Transform, Load (ETL)** process for efficient document retrieval, analysis, and indexing.
 
 ## Visitors Count
 
