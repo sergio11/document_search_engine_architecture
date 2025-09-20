@@ -51,6 +51,7 @@ For comprehensive information about this project, check out this [Medium article
 ## Architecture Overview 🏛️
 
 <img width="auto" src="./images/document_search_engine_architecture.png" />
+*Diagram created with [diagrams.net](https://www.diagrams.net/)*
 
 Several critical components underpin our project, including:
 
